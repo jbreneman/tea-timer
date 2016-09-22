@@ -1,0 +1,11 @@
+@import 'title';
+@import 'countdown';
+@import 'opts';
+
+.timer {
+	width: calc(100vh - 2rem);
+	max-width: 475px;
+	height: calc(100vh - 2rem);
+	max-height: 775px;
+	background-color: $color-light;
+}
