@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Peace Sans';
+    src: url('peace-sans.woff2') format('woff2'),
+         url('peace-sans.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+$peace-sans: 'Peace Sans', sans-serif;
+$oswald: Oswald, sans-serif;
