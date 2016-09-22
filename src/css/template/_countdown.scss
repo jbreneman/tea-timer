@@ -1,3 +1,12 @@
 .timer-countdown {
-	background-color: white;
+	background-color: $color-light;
+	display: flex;
+	justify-content: center;
+	padding: 3rem 2rem;
+
+	&__text {
+		font-family: $peace-sans;
+		font-size: 6rem;
+		color: $color-dark;
+	}
 }

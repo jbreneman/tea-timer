@@ -58,7 +58,7 @@ html {
   box-sizing: inherit; }
 
 body {
-  background-image: url("../images/gg.gif");
+  background-image: url("../images/background.jpg");
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -80,7 +80,7 @@ body {
     text-transform: uppercase;
     font-weight: 400;
     letter-spacing: -3px;
-    color: white;
+    color: #F1E1C8;
     text-align: right;
     padding: 0 5px 0 0;
     line-height: .65; }
@@ -89,7 +89,43 @@ body {
     letter-spacing: 0; }
 
 .timer-countdown {
-  background-color: white; }
+  background-color: #F1E1C8;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 3rem 2rem; }
+  .timer-countdown__text {
+    font-family: "Peace Sans", sans-serif;
+    font-size: 6rem;
+    color: #222222; }
+
+.timer-opts {
+  background-color: #F1E1C8; }
+  .timer-opts__nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background-color: #ecd6b4; }
+  .timer-opts__link {
+    font-family: Oswald, sans-serif;
+    font-size: 1.5rem;
+    color: #222222;
+    padding: 1rem 2rem;
+    background-color: rgba(255, 255, 255, 0);
+    border: 0;
+    -webkit-transition: background-color 0.24s ease-in;
+    transition: background-color 0.24s ease-in;
+    cursor: pointer; }
+    .timer-opts__link:not(:last-of-type) {
+      margin-right: 1px; }
+    .timer-opts__link:hover {
+      background-color: #e7cb9f; }
+    .timer-opts__link.active {
+      background-color: #e7cb9f;
+      cursor: default; }
 
 .timer {
   width: calc(100vh - 2rem);

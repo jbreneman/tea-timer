@@ -1,0 +1,32 @@
+.timer-opts {
+	background-color: $color-light;
+
+	&__nav {
+		display: flex;
+		background-color: darken($color-light, 5%);
+	}
+
+	&__link {
+		font-family: $oswald;
+		font-size: 1.5rem;
+		color: $color-dark;
+		padding: 1rem 2rem;
+		background-color: rgba(white, 0);
+		border: 0;
+		transition: background-color $easing--default;
+		cursor: pointer;
+
+		&:not(:last-of-type) {
+			margin-right: 1px;
+		}
+
+		&:hover {
+			background-color: darken($color-light, 10%);
+		}
+
+		&.active {
+			background-color: darken($color-light, 10%);
+			cursor: default;
+		}
+	}
+}
