@@ -1,5 +1,8 @@
 .timer-opts {
-	background-color: $color-light;
+	background-color: darken($color-light, 10%);
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
 
 	&__nav {
 		display: flex;
@@ -27,6 +30,78 @@
 		&.active {
 			background-color: darken($color-light, 10%);
 			cursor: default;
+		}
+	}
+
+	&__section {
+		flex-grow: 1;
+		margin: 1rem;
+		overflow: auto;
+	}
+}
+
+.timer-item {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	background-color: $color-light;
+	padding: 2rem;
+	position: relative;
+
+	&:not(:last-of-type) {
+		margin-bottom: .5rem;
+	}
+
+	&__amount {
+		width: 25%;
+		font-family: $peace-sans;
+		color: $color-dark;
+		background-color: rgba(white, 0);
+		border: 0;
+		font-size: 2rem;
+		margin-right: .5rem;
+		-webkit-appearance: none;
+		outline: none;
+	}
+
+	&__desc {
+		width: 55%;
+		font-size: .875rem;
+		text-transform: uppercase;
+		-webkit-appearance: none;
+		outline: none;
+	}
+
+	&__button {
+		position: absolute;
+		right: 0;
+		top: 0;
+		height: 100%;
+		width: 20%;
+		background-color: rgba(white, 0);
+		border: 0;
+		transition: background-color $easing--default;
+		cursor: pointer;
+		-webkit-appearance: none;
+		outline: none;
+
+		&:hover {
+			background-color: darken($color-light, 5%);
+		}
+
+		&:active {
+			.icon-arrow {
+				transform: translateX(3px);
+			}
+		}
+
+		.icon-arrow {
+			width: 60%;
+			transition: transform $easing--default;
+
+			path {
+				fill: $color-dark;
+			}
 		}
 	}
 }

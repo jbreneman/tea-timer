@@ -103,7 +103,17 @@ body {
     color: #222222; }
 
 .timer-opts {
-  background-color: #F1E1C8; }
+  background-color: #e7cb9f;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
   .timer-opts__nav {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -126,9 +136,78 @@ body {
     .timer-opts__link.active {
       background-color: #e7cb9f;
       cursor: default; }
+  .timer-opts__section {
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    margin: 1rem;
+    overflow: auto; }
+
+.timer-item {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #F1E1C8;
+  padding: 2rem;
+  position: relative; }
+  .timer-item:not(:last-of-type) {
+    margin-bottom: .5rem; }
+  .timer-item__amount {
+    width: 25%;
+    font-family: "Peace Sans", sans-serif;
+    color: #222222;
+    background-color: rgba(255, 255, 255, 0);
+    border: 0;
+    font-size: 2rem;
+    margin-right: .5rem;
+    -webkit-appearance: none;
+    outline: none; }
+  .timer-item__desc {
+    width: 55%;
+    font-size: .875rem;
+    text-transform: uppercase;
+    -webkit-appearance: none;
+    outline: none; }
+  .timer-item__button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 20%;
+    background-color: rgba(255, 255, 255, 0);
+    border: 0;
+    -webkit-transition: background-color 0.24s ease-in;
+    transition: background-color 0.24s ease-in;
+    cursor: pointer;
+    -webkit-appearance: none;
+    outline: none; }
+    .timer-item__button:hover {
+      background-color: #ecd6b4; }
+    .timer-item__button:active .icon-arrow {
+      -webkit-transform: translateX(3px);
+              transform: translateX(3px); }
+    .timer-item__button .icon-arrow {
+      width: 60%;
+      -webkit-transition: -webkit-transform 0.24s ease-in;
+      transition: -webkit-transform 0.24s ease-in;
+      transition: transform 0.24s ease-in;
+      transition: transform 0.24s ease-in, -webkit-transform 0.24s ease-in; }
+      .timer-item__button .icon-arrow path {
+        fill: #222222; }
 
 .timer {
   width: calc(100vh - 2rem);
   max-width: 475px;
   height: calc(100vh - 2rem);
-  max-height: 775px; }
+  max-height: 775px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
