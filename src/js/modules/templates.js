@@ -1,0 +1,53 @@
+const Vue = require('../libs/vue');
+
+Vue.component('timer-title', {
+	template: `
+	<div class="timer-title">
+        <h1 class="timer-title__heading">
+            <span class="timer-title__small">(tea)</span>timer
+        </h1>
+    </div>`
+});
+
+Vue.component('countdown', {
+	props: ['currentTime'],
+	template: `
+	<section class="timer-countdown">
+        <div class="timer-countdown__text">{{ currentTime }}</div>
+    </section>`
+});
+
+Vue.component('options', {
+	props: ['navOptions', 'activeNav'],
+	template: `
+	<section class="timer-opts">
+        <options-nav :nav-options="navOptions" :active-nav="activeNav"></options-nav>
+    </section>`
+});
+
+Vue.component('options-nav', {
+	props: ['navOptions', 'activeNav'],
+	template: `
+	<nav class="timer-opts__nav">
+        <button class="timer-opts__link" :class="{ 'active': activeNav === option }" @click="changeNav(option)" v-for="option in navOptions">{{ option }}</button>
+    </nav>`,
+    methods: {
+    	changeNav: function(opt) {
+    		this.$dispatch('nav:update', opt);
+    	}
+    }
+});
+
+Vue.component('timer-item', {
+	props: ['timers'],
+	template: `
+	<div class="timer-item">
+        <input type="text" class="timer-item__amount" value="3:00">
+        <div class="timer-item__desc" contenteditable="true">Tea -- long</div>
+        <button class="timer-item__button">
+            <svg class="icon-arrow" viewBox="0 0 64 64">
+                <path d="m 10.966268,58.441755 0,-25.628195 0,-25.6281938 L 33.160936,19.999464 55.355602,32.81356 33.160934,45.627658 Z" />
+            </svg>
+        </button>
+    </div>`
+});
