@@ -3,6 +3,7 @@
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
 
 	&__nav {
 		display: flex;
@@ -18,6 +19,8 @@
 		border: 0;
 		transition: background-color $easing--default;
 		cursor: pointer;
+		-webkit-appearance: none;
+		outline: none;
 
 		&:not(:last-of-type) {
 			margin-right: 1px;
@@ -37,6 +40,12 @@
 		flex-grow: 1;
 		margin: 1rem;
 		overflow: auto;
+		opacity: 0;
+		transition: opacity $easing--default;
+
+		&.active {
+			opacity: 1;
+		}
 	}
 }
 

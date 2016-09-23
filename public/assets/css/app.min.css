@@ -115,7 +115,8 @@ body {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
-          flex-direction: column; }
+          flex-direction: column;
+  overflow: hidden; }
   .timer-opts__nav {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -130,7 +131,9 @@ body {
     border: 0;
     -webkit-transition: background-color 0.24s ease-in;
     transition: background-color 0.24s ease-in;
-    cursor: pointer; }
+    cursor: pointer;
+    -webkit-appearance: none;
+    outline: none; }
     .timer-opts__link:not(:last-of-type) {
       margin-right: 1px; }
     .timer-opts__link:hover {
@@ -143,7 +146,12 @@ body {
         -ms-flex-positive: 1;
             flex-grow: 1;
     margin: 1rem;
-    overflow: auto; }
+    overflow: auto;
+    opacity: 0;
+    -webkit-transition: opacity 0.24s ease-in;
+    transition: opacity 0.24s ease-in; }
+    .timer-opts__section.active {
+      opacity: 1; }
 
 .timer-item {
   width: 100%;

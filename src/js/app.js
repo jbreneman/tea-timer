@@ -9,12 +9,16 @@ import './modules/templates';
 		data: {
 			currentTime: '3:24',
 			navOptions: ['timers', 'options'],
-			activeNav: 'timers'
+			activeNav: 'timers',
+			timers: [{
+				amount: '3:00',
+				desc: 'Tea -- long timer'
+			}]
 		},
 		template: `
 		<timer-title></timer-title>
 		<countdown :current-time="currentTime"></countdown>
-		<options :nav-options="navOptions" :active-nav="activeNav"></options>`,
+		<options :nav-options="navOptions" :active-nav="activeNav" :timers="timers"></options>`,
 		replace: false,
 		events: {
 			'nav:update': function(opt) {
