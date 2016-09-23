@@ -60,18 +60,28 @@ Vue.component('timer-item', {
 	props: ['timer'],
 	template: `
 	<div class="timer-item">
-        <amount :amount="timer.amount"></amount>
-        <description :desc="timer.desc"></description>
+        <amount :timer="timer"></amount>
+        <description :timer="timer"></description>
         <go-button></go-button>
     </div>`,
     components: {
     	'amount': {
-    		props: ['amount'],
-    		template: `<input type="text" class="timer-item__amount" value="{{ amount }}">`
+    		props: ['timer'],
+    		template: `<input type="text" class="timer-item__amount" value="{{ timer.amount }}" @input="newInput(inputAmount)" v-model="inputAmount">`,
+    		methods: {
+    			newInput: function(val) {
+    				this.$dispatch('timer:update', { id: this.timer.id, amount: val, desc: this.timer.desc });
+    			}
+    		}
     	},
     	'description': {
-    		props: ['desc'],
-    		template: `<div class="timer-item__desc" contenteditable="true">{{ desc }}</div>`
+    		props: ['timer'],
+    		template: `<div class="timer-item__desc" contenteditable="true" @input="newInput">{{ timer.desc }}</div>`,
+    		methods: {
+    			newInput: function(e) {
+    				this.$dispatch('timer:update', { id: this.timer.id, amount: this.timer.amount, desc: e.target.innerText });
+    			}
+    		}
     	},
     	'go-button': {
     		template: `

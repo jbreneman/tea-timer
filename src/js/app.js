@@ -11,6 +11,7 @@ import './modules/templates';
 			navOptions: ['timers', 'options'],
 			activeNav: 'timers',
 			timers: [{
+				id: 1,
 				amount: '3:00',
 				desc: 'Tea -- long timer'
 			}]
@@ -21,8 +22,11 @@ import './modules/templates';
 		<options :nav-options="navOptions" :active-nav="activeNav" :timers="timers"></options>`,
 		replace: false,
 		events: {
-			'nav:update': function(opt) {
-				this.activeNav = opt;
+			'nav:update': function(val) {
+				this.activeNav = val;
+			},
+			'timer:update': function(val) {
+				//update amount in store
 			}
 		}
 	});
