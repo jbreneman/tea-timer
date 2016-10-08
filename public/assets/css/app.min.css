@@ -164,16 +164,20 @@ body {
   position: relative; }
   .timer-item:not(:last-of-type) {
     margin-bottom: .5rem; }
+  .timer-item__minutes {
+    text-align: right; }
   .timer-item__amount {
-    width: 25%;
+    width: 15%;
     font-family: "Peace Sans", sans-serif;
     color: #222222;
     background-color: rgba(255, 255, 255, 0);
     border: 0;
     font-size: 2rem;
-    margin-right: .5rem;
     -webkit-appearance: none;
     outline: none; }
+    .timer-item__amount::-webkit-inner-spin-button, .timer-item__amount::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0; }
   .timer-item__desc {
     width: 55%;
     font-size: .875rem;

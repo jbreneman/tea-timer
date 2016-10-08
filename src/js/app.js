@@ -19,7 +19,7 @@ import './modules/templates';
 		template: `
 		<timer-title></timer-title>
 		<countdown :current-time="currentTime"></countdown>
-		<options :nav-options="navOptions" :active-nav="activeNav" :timers.sync="timers"></options>`,
+		<options :nav-options="navOptions" :active-nav="activeNav" :timers="timers"></options>`,
 		replace: false,
 		events: {
 			'nav:update': function(val) {

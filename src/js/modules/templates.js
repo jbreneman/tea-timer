@@ -23,7 +23,7 @@ Vue.component('options', {
 	template: `
 	<section class="timer-opts">
         <options-nav :nav-options="navOptions" :active-nav="activeNav"></options-nav>
-        <options-section-timer :timers.sync="timers" :class="{ 'active': activeNav === 'timers' }"></options-section-timer>
+        <options-section-timer :timers="timers" :class="{ 'active': activeNav === 'timers' }"></options-section-timer>
         <options-section :class="{ 'active': activeNav === 'options' }"></options-section>
     </section>`
 });
@@ -53,7 +53,7 @@ Vue.component('options-section-timer', {
 	props: ['timers'],
 	template: `
 	<div class="timer-opts__section">
-		<timer-item v-for="timer in timers" :timer.sync="timer"></timer-item>
+		<timer-item v-for="timer in timers" :timer="timer"></timer-item>
 	</section>`
 });
 
@@ -61,8 +61,8 @@ Vue.component('timer-item', {
 	props: ['timer'],
 	template: `
 	<div class="timer-item">
-        <amount :timer.sync="timer"></amount>
-        <description :timer.sync="timer"></description>
+        <amount :timer="timer"></amount>
+        <description :timer="timer"></description>
         <go-button></go-button>
     </div>`,
     components: {
@@ -85,7 +85,7 @@ Vue.component('timer-item', {
     				return this.inputMinutes * 60 + this.inputSeconds;
     			}
     		},
-    		template: `<input type="text" class="timer-item__amount" v-model="inputMinutes" value="{{ minutes }}">:<input type="text" class="timer-item__amount" value="{{ seconds }}" v-model="inputSeconds">`,
+    		template: `<input type="number" min="00" max="99" class="timer-item__amount timer-item__minutes" v-model="inputMinutes" value="{{ minutes }}">:<input type="number" min="00" max="60" class="timer-item__amount timer-amount__seconds" value="{{ seconds }}" v-model="inputSeconds">`,
     		watch: {
     			inputMinutes: function(val) {
     				this.inputMinutes = val;
