@@ -1,4 +1,5 @@
 const Vue = require('../libs/vue');
+const util = require('./util');
 
 Vue.component('timer-title', {
 	template: `
@@ -22,7 +23,7 @@ Vue.component('options', {
 	template: `
 	<section class="timer-opts">
         <options-nav :nav-options="navOptions" :active-nav="activeNav"></options-nav>
-        <options-section-timer :timers="timers" :class="{ 'active': activeNav === 'timers' }"></options-section-timer>
+        <options-section-timer :timers.sync="timers" :class="{ 'active': activeNav === 'timers' }"></options-section-timer>
         <options-section :class="{ 'active': activeNav === 'options' }"></options-section>
     </section>`
 });
@@ -52,7 +53,7 @@ Vue.component('options-section-timer', {
 	props: ['timers'],
 	template: `
 	<div class="timer-opts__section">
-		<timer-item v-for="timer in timers" :timer="timer"></timer-item>
+		<timer-item v-for="timer in timers" :timer.sync="timer"></timer-item>
 	</section>`
 });
 
@@ -60,17 +61,34 @@ Vue.component('timer-item', {
 	props: ['timer'],
 	template: `
 	<div class="timer-item">
-        <amount :timer="timer"></amount>
-        <description :timer="timer"></description>
+        <amount :timer.sync="timer"></amount>
+        <description :timer.sync="timer"></description>
         <go-button></go-button>
     </div>`,
     components: {
     	'amount': {
     		props: ['timer'],
-    		template: `<input type="text" class="timer-item__amount" value="{{ timer.amount }}" @input="newInput(inputAmount)" v-model="inputAmount">`,
-    		methods: {
-    			newInput: function(val) {
-    				this.$dispatch('timer:update', { id: this.timer.id, amount: val, desc: this.timer.desc });
+    		data: {
+    			inputMinutes: this.inputMinutes,
+    			inputSeconds: this.inputSeconds
+    		},
+    		computed: {
+    			minutes: function() {
+    				const time = util.formatTime(this.timer.amount);
+    				return time.minutes;
+    			},
+    			seconds: function() {
+    				const time = util.formatTime(this.timer.amount);
+    				return time.seconds;
+    			},
+    			total: function() {
+    				return this.inputMinutes * 60 + this.inputSeconds;
+    			}
+    		},
+    		template: `<input type="text" class="timer-item__amount" v-model="inputMinutes" value="{{ minutes }}">:<input type="text" class="timer-item__amount" value="{{ seconds }}" v-model="inputSeconds">`,
+    		watch: {
+    			inputMinutes: function(val) {
+    				this.inputMinutes = val;
     			}
     		}
     	},

@@ -12,14 +12,14 @@ import './modules/templates';
 			activeNav: 'timers',
 			timers: [{
 				id: 1,
-				amount: '3:00',
+				amount: 180,
 				desc: 'Tea -- long timer'
 			}]
 		},
 		template: `
 		<timer-title></timer-title>
 		<countdown :current-time="currentTime"></countdown>
-		<options :nav-options="navOptions" :active-nav="activeNav" :timers="timers"></options>`,
+		<options :nav-options="navOptions" :active-nav="activeNav" :timers.sync="timers"></options>`,
 		replace: false,
 		events: {
 			'nav:update': function(val) {
