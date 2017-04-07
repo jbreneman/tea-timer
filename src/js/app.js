@@ -2,32 +2,27 @@
 
 import Vue from './libs/vue';
 import './modules/templates';
+import { store } from './modules/store';
 
-{
-	const vm = new Vue({
-		el: '#app',
-		data: {
-			currentTime: '3:24',
-			navOptions: ['timers', 'options'],
-			activeNav: 'timers',
-			timers: [{
-				id: 1,
-				amount: 180,
-				desc: 'Tea -- long timer'
-			}]
-		},
-		template: `
-		<timer-title></timer-title>
-		<countdown :current-time="currentTime"></countdown>
-		<options :nav-options="navOptions" :active-nav="activeNav" :timers="timers"></options>`,
-		replace: false,
-		events: {
-			'nav:update': function(val) {
-				this.activeNav = val;
-			},
-			'timer:update': function(val) {
-				//update amount in store
-			}
-		}
-	});
-}
+const vm = new Vue({
+	el: '#app',
+	store,
+	template: `
+		<div id="app" class="timer">
+			<timer-title></timer-title>
+			<countdown></countdown>
+			<options></options>
+		</div>`,
+	ready: function() {
+		this.on('timer:update', function(val) {
+			let timers = this.timers.splice(0);
+
+			console.log('here');
+			timers.forEach((timer, index) => {
+				timers[index] = timer.id === val.id ? val : timer;
+			});
+
+			this.timers = timers;
+		});
+	}
+});

@@ -166,8 +166,10 @@ body {
     margin-bottom: .5rem; }
   .timer-item__minutes {
     text-align: right; }
+  .timer-item__time {
+    width: 30%; }
   .timer-item__amount {
-    width: 15%;
+    width: 45%;
     font-family: "Peace Sans", sans-serif;
     color: #222222;
     background-color: rgba(255, 255, 255, 0);

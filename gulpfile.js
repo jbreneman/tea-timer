@@ -2,8 +2,10 @@ var gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	rename = require('gulp-rename'),
 	autoprefixer = require('gulp-autoprefixer'),
-	babel = require('gulp-babel'),
-	browserify = require('gulp-browserify'),
+	babelify = require('babelify'),
+	browserify = require('browserify'),
+	source = require('vinyl-source-stream');
+	buffer = require('vinyl-buffer');
 	browserSync = require('browser-sync').create();
 
 var dirs = {
@@ -23,13 +25,12 @@ gulp.task('sass', function(){
 
 // js transpilation
 gulp.task('js', function(){
-	return gulp.src(dirs.src + 'js/app.js')
-		.pipe(babel({
-            presets: ['es2015']
-        }))
-        .pipe(browserify())
-		.pipe(rename('app.min.js'))
+	browserify([dirs.src + 'js/app.js'])
+		.transform(babelify, {presets: ["es2015"]})
+		.bundle()
+		.pipe(source('app.min.js'))
 		.pipe(gulp.dest(dirs.build + 'js/'))
+		.pipe(buffer())
 		.pipe(browserSync.stream());
 });
 

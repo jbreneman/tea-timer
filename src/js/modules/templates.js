@@ -1,5 +1,7 @@
-const Vue = require('../libs/vue');
-const util = require('./util');
+import Vue from '../libs/vue';
+import Vuex from '../libs/vuex';
+import store from '../modules/store';
+import * as util from './util';
 
 Vue.component('timer-title', {
 	template: `
@@ -11,7 +13,11 @@ Vue.component('timer-title', {
 });
 
 Vue.component('countdown', {
-	props: ['currentTime'],
+	computed: {
+		currentTime() {
+			return this.$store.state.currentTime;
+		}
+	},
 	template: `
 	<section class="timer-countdown">
         <div class="timer-countdown__text">{{ currentTime }}</div>
@@ -19,7 +25,17 @@ Vue.component('countdown', {
 });
 
 Vue.component('options', {
-	props: ['navOptions', 'activeNav', 'timers'],
+    computed: {
+        navOptions() {
+            return this.$store.state.navOptions;
+        },
+        activeNav() {
+            return this.$store.state.activeNav;
+        },
+        timers() {
+            return this.$store.state.timers;
+        }
+    },
 	template: `
 	<section class="timer-opts">
         <options-nav :nav-options="navOptions" :active-nav="activeNav"></options-nav>
@@ -36,7 +52,7 @@ Vue.component('options-nav', {
     </nav>`,
     methods: {
     	changeNav: function(opt) {
-    		this.$dispatch('nav:update', opt);
+            this.$store.commit('navUpdate', opt);
     	}
     }
 });
@@ -68,27 +84,24 @@ Vue.component('timer-item', {
     components: {
     	'amount': {
     		props: ['timer'],
-    		data: {
-    			inputMinutes: this.inputMinutes,
-    			inputSeconds: this.inputSeconds
-    		},
-    		computed: {
-    			minutes: function() {
-    				const time = util.formatTime(this.timer.amount);
-    				return time.minutes;
-    			},
-    			seconds: function() {
-    				const time = util.formatTime(this.timer.amount);
-    				return time.seconds;
-    			},
-    			total: function() {
-    				return this.inputMinutes * 60 + this.inputSeconds;
+    		data: function() {
+    			return {
+    				inputMinutes: util.formatTime(this.timer.amount)['minutes'],
+    				inputSeconds: util.formatTime(this.timer.amount)['seconds']
     			}
     		},
-    		template: `<input type="number" min="00" max="99" class="timer-item__amount timer-item__minutes" v-model="inputMinutes" value="{{ minutes }}">:<input type="number" min="00" max="60" class="timer-item__amount timer-amount__seconds" value="{{ seconds }}" v-model="inputSeconds">`,
+    		template: `
+    		<div class="timer-item__time">
+    		<input type="text" class="timer-item__amount timer-item__minutes" v-model="inputMinutes">:<input type="text" class="timer-item__amount timer-amount__seconds" v-model="inputSeconds">
+    		</div>`,
     		watch: {
     			inputMinutes: function(val) {
-    				this.inputMinutes = val;
+    				const amount = parseInt(this.inputMinutes) * 60 + parseInt(this.inputSeconds);
+    				this.$emit('timer:update', { id: this.timer.id, amount: +amount, desc: this.timer.desc });
+    			},
+    			inputSeconds: function(val) {
+    				const amount = parseInt(this.inputMinutes) * 60 + parseInt(this.inputSeconds);
+    				this.$emit('timer:update', { id: this.timer.id, amount: +amount, desc: this.timer.desc });
     			}
     		}
     	},
@@ -97,7 +110,7 @@ Vue.component('timer-item', {
     		template: `<div class="timer-item__desc" contenteditable="true" @input="newInput">{{ timer.desc }}</div>`,
     		methods: {
     			newInput: function(e) {
-    				this.$dispatch('timer:update', { id: this.timer.id, amount: this.timer.amount, desc: e.target.innerText });
+    				this.$emit('timer:update', { id: this.timer.id, amount: this.timer.amount, desc: e.target.innerText });
     			}
     		}
     	},

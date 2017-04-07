@@ -65,8 +65,12 @@
 		text-align: right;
 	}
 
+	&__time {
+		width: 30%;
+	}
+
 	&__amount {
-		width: 15%;
+		width: 45%;
 		font-family: $peace-sans;
 		color: $color-dark;
 		background-color: rgba(white, 0);
