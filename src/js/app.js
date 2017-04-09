@@ -10,9 +10,15 @@ const vm = new Vue({
 	template: `
 		<div id="app" class="timer">
 			<timer-title></timer-title>
-			<countdown></countdown>
-			<options></options>
+			<section class="timer__body">
+				<countdown></countdown>
+				<options></options>
+			</section>
 		</div>`,
+	mounted: function() {
+		this.$el.style.height = `${ this.$el.offsetHeight }px`;
+		this.$el.style.width = `${ this.$el.offsetWidth }px`;
+	},
 	ready: function() {
 		this.on('timer:update', function(val) {
 			let timers = this.timers.splice(0);

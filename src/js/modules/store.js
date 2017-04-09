@@ -12,11 +12,21 @@ const store = new Vuex.Store({
 			id: 1,
 			amount: 180,
 			desc: 'Tea -- long timer'
+		},
+		{
+			id: 2,
+			amount: 240,
+			desc: 'Tea -- short timer'
 		}]
 	},
 	mutations: {
 		navUpdate(state, mutation) {
 			state.activeNav = mutation;
+		},
+		setTimer(state, mutation) {
+			state.timers = state.timers.forEach((timer, index) => {
+				state.timers[index] = timer.id === mutation.id ? mutation : timer;
+			});
 		}
 	}
 });

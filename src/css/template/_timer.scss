@@ -3,10 +3,19 @@
 @import 'opts';
 
 .timer {
+	position: relative;
 	width: calc(100vh - 2rem);
 	max-width: 475px;
 	height: calc(100vh - 2rem);
 	max-height: 775px;
 	display: flex;
 	flex-direction: column;
+
+	&__body {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+		z-index: 0;
+	}
 }

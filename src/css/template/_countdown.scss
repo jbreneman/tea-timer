@@ -1,5 +1,10 @@
 .timer-countdown {
+	position: absolute;
+	z-index: -1;
+	left: 0;
+	top: 0;
 	background-color: $color-light;
+	flex-shrink: 0;
 	display: flex;
 	justify-content: center;
 	padding: 3rem 2rem;
