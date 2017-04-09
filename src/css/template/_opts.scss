@@ -62,16 +62,22 @@
 		margin-bottom: .5rem;
 	}
 
+	&__about {
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+	}
+
 	&__minutes {
 		text-align: right;
 	}
 
 	&__time {
-		width: 30%;
+		width: 100%;
 	}
 
 	&__amount {
-		width: 45%;
+		width: 50px;
 		font-family: $peace-sans;
 		color: $color-dark;
 		background-color: rgba(white, 0);

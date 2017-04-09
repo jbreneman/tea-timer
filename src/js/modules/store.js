@@ -24,7 +24,7 @@ const store = new Vuex.Store({
 			state.activeNav = mutation;
 		},
 		setTimer(state, mutation) {
-			state.timers = state.timers.forEach((timer, index) => {
+			state.timers.forEach((timer, index) => {
 				state.timers[index] = timer.id === mutation.id ? mutation : timer;
 			});
 		}

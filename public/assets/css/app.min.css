@@ -174,12 +174,23 @@ body {
   position: relative; }
   .timer-item:not(:last-of-type) {
     margin-bottom: .5rem; }
+  .timer-item__about {
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; }
   .timer-item__minutes {
     text-align: right; }
   .timer-item__time {
-    width: 30%; }
+    width: 100%; }
   .timer-item__amount {
-    width: 45%;
+    width: 50px;
     font-family: "Peace Sans", sans-serif;
     color: #222222;
     background-color: rgba(255, 255, 255, 0);
