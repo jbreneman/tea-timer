@@ -1,13 +1,16 @@
 .timer-countdown {
-	position: absolute;
-	z-index: -1;
-	left: 0;
-	top: 0;
 	background-color: $color-light;
 	flex-shrink: 0;
-	display: flex;
-	justify-content: center;
-	padding: 3rem 2rem;
+	transition: height $easing--default;
+	height: 0;
+	overflow: hidden;
+
+	&__content {
+		padding: 3rem 2rem;
+		display: flex;
+		justify-content: center;
+		height: 100%;
+	}
 
 	&__text {
 		font-family: $peace-sans;

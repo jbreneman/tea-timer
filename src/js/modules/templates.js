@@ -14,14 +14,35 @@ Vue.component('timer-title', {
 
 Vue.component('countdown', {
 	computed: {
-		currentTime() {
-			return this.$store.state.currentTime;
-		}
+        active() {
+            return this.$store.state.timers.filter(timer => timer.active).length > 0;
+        },
+        activeTimer() {
+            return this.$store.state.timers.filter(timer => timer.active)[0] || null;
+        },
+        formattedTotal() {
+            const formatted = util.formatTime(this.activeTimer.amount);
+            return `${ formatted.minutes }:${ formatted.seconds }`;
+        },
+        formattedCountdown() {
+            const formatted = util.formatTime(this.activeTimer.countdown);
+            return `${ formatted.minutes }:${ formatted.seconds }`;
+        }
 	},
 	template: `
-	<section class="timer-countdown">
-        <div class="timer-countdown__text">{{ currentTime }}</div>
-    </section>`
+    	<section class="timer-countdown">
+            <div class="timer-countdown__content" v-if="active">
+                <div class="timer-countdown__text">{{ formattedCountdown }}</div>
+            </div>
+        </section>
+    `,
+    updated: function() {
+        if (this.active) {
+            this.$el.style.height = `${ this.$store.state.settings.height * .33 }px`;
+        } else {
+            this.$el.style.height = `0`;
+        }
+    }
 });
 
 Vue.component('options', {
@@ -69,7 +90,7 @@ Vue.component('options-section-timer', {
 	props: ['timers'],
 	template: `
 	<section class="timer-opts__section">
-		<timer-item v-for="timer in timers" :timer="timer"></timer-item>
+		<timer-item v-for="timer in timers" :timer="timer" :key="timer.id"></timer-item>
 	</section>`
 });
 
@@ -81,7 +102,7 @@ Vue.component('timer-item', {
             <amount :timer="timer"></amount>
             <description :timer="timer"></description>
         </section>
-        <go-button></go-button>
+        <go-button :id="timer.id"></go-button>
     </div>`,
     components: {
     	'amount': {
@@ -120,12 +141,18 @@ Vue.component('timer-item', {
     		}
     	},
     	'go-button': {
+            props: ['id'],
     		template: `
-    		<button class="timer-item__button">
+    		<button class="timer-item__button" @click="startTimer(id)">
     		    <svg class="icon-arrow" viewBox="0 0 64 64">
     		        <path d="m 10.966268,58.441755 0,-25.628195 0,-25.6281938 L 33.160936,19.999464 55.355602,32.81356 33.160934,45.627658 Z" />
     		    </svg>
-    		</button>`
+    		</button>`,
+            methods: {
+                startTimer: function(id) {
+                    this.$store.commit('startTimer', { id: id });
+                }
+            }
     	}
     }
 });
