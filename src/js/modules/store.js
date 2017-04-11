@@ -44,6 +44,9 @@ const store = new Vuex.Store({
 					storage.set('timers', state.timers);
 				} else {
 					window.clearInterval(state.interval);
+					active.playing = false;
+					active.countdown = active.amount;
+					storage.set('timers', state.timers);
 				}
 			}, 1000);
 		}
