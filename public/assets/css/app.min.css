@@ -112,7 +112,19 @@ body {
   .timer-countdown__text {
     font-family: "Peace Sans", sans-serif;
     font-size: 6rem;
-    color: #222222; }
+    color: #222222;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+  .timer-countdown__character-wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+  .timer-countdown__character {
+    text-align: right; }
+    .timer-countdown__character + .timer-countdown__character {
+      width: 73px;
+      text-align: left; }
 
 .timer-opts {
   background-color: #e7cb9f;

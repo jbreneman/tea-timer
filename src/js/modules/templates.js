@@ -25,14 +25,14 @@ Vue.component('countdown', {
             return `${ formatted.minutes }:${ formatted.seconds }`;
         },
         formattedCountdown() {
-            const formatted = util.formatTime(this.activeTimer.countdown);
-            return `${ formatted.minutes }:${ formatted.seconds }`;
+            const formatted = util.splitTime(this.activeTimer.countdown);
+            return `<span class="timer-countdown__character-wrap">${ formatted.minutes }</span>:<span class="timer-countdown__character-wrap">${ formatted.seconds }</span>`;
         }
 	},
 	template: `
     	<section class="timer-countdown">
             <div class="timer-countdown__content" v-if="active">
-                <div class="timer-countdown__text">{{ formattedCountdown }}</div>
+                <div class="timer-countdown__text" v-html="formattedCountdown"></div>
             </div>
         </section>
     `,

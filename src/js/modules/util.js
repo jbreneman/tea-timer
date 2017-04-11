@@ -8,4 +8,25 @@ function formatTime(seconds) {
 	return time;
 }
 
-export { formatTime };
+function wrapCharacters(str, className = null) {
+	return str
+		.split('')
+		.map((val) => {
+			if (className) {
+				return `<span class="${ className }">${ val }</span>`;
+			}
+			return `<span>${ val }</span>`;
+		})
+		.join('');
+}
+
+function splitTime(seconds) {
+	const time = formatTime(seconds);
+
+	return {
+		minutes: wrapCharacters(time.minutes, 'timer-countdown__character'),
+		seconds: wrapCharacters(time.seconds, 'timer-countdown__character')
+	}
+}
+
+export { formatTime, splitTime };

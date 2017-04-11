@@ -14,8 +14,8 @@ const store = new Vuex.Store({
 		interval: null,
 		timers: [{
 			id: 1,
-			amount: 180,
-			countdown: 180,
+			amount: 10,
+			countdown: 60,
 			desc: 'Tea -- long timer',
 			active: false,
 			playing: false

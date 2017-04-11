@@ -16,5 +16,19 @@
 		font-family: $peace-sans;
 		font-size: 6rem;
 		color: $color-dark;
+		display: flex;
+	}
+
+	&__character-wrap {
+		display: flex;
+	}
+
+	&__character {
+		text-align: right;
+
+		& + & {
+			width: 73px;
+			text-align: left;
+		}
 	}
 }
