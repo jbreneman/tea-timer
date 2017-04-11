@@ -8,6 +8,7 @@
 
 	&__nav {
 		display: flex;
+		flex-shrink: 0;
 	}
 
 	&__link {
@@ -38,13 +39,17 @@
 
 	&__section {
 		height: 100%;
-		margin: 1rem;
-		overflow: auto;
+		padding: 1rem;
+		overflow: scroll;
 		opacity: 0;
 		transition: opacity $easing--default;
 
 		&.active {
 			opacity: 1;
+		}
+
+		&.options {
+			display: none;
 		}
 	}
 

@@ -13,7 +13,7 @@ const store = new Vuex.Store({
 		navOptions: ['timers', 'options'],
 		activeNav: 'timers',
 		interval: null,
-		timers: storage.get('timers')
+		timers: storage.get('timers') || []
 	},
 	mutations: {
 		updateSizes(state, mutation) {
@@ -24,9 +24,13 @@ const store = new Vuex.Store({
 			state.activeNav = mutation;
 		},
 		setTimer(state, mutation) {
-			state.timers.forEach((timer, index) => {
-				state.timers[index] = timer.id === mutation.id ? mutation : timer;
-			});
+			if (state.timers && state.timers.filter(timer => timer.id === mutation.id).length > 0) {
+				state.timers.forEach((timer, index) => {
+					state.timers[index] = timer.id === mutation.id ? mutation : timer;
+				});
+			} else {
+				state.timers.push(mutation);
+			}
 
 			storage.set('timers', state.timers);
 		},

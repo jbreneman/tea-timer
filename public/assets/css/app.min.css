@@ -149,7 +149,9 @@ body {
   .timer-opts__nav {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex; }
+    display: flex;
+    -ms-flex-negative: 0;
+        flex-shrink: 0; }
   .timer-opts__link {
     font-family: Oswald, sans-serif;
     font-size: 1.5rem;
@@ -171,13 +173,15 @@ body {
       background-color: rgba(255, 255, 255, 0); }
   .timer-opts__section {
     height: 100%;
-    margin: 1rem;
-    overflow: auto;
+    padding: 1rem;
+    overflow: scroll;
     opacity: 0;
     -webkit-transition: opacity 0.24s ease-in;
     transition: opacity 0.24s ease-in; }
     .timer-opts__section.active {
       opacity: 1; }
+    .timer-opts__section.options {
+      display: none; }
   .timer-opts__fill {
     -webkit-box-flex: 1;
         -ms-flex-positive: 1;

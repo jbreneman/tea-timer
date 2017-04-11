@@ -16,7 +16,7 @@ const vm = new Vue({
 			</section>
 		</div>`,
 	mounted: function() {
-		store.commit('updateSizes', { width: this.$el.offsetWidth, height: this.$el.offsetHeight })
+		store.commit('updateSizes', { width: this.$el.querySelector('.timer__body').offsetWidth, height: this.$el.querySelector('.timer__body').offsetHeight })
 		this.$el.style.height = `${ this.$el.offsetHeight }px`;
 		this.$el.style.width = `${ this.$el.offsetWidth }px`;
 	}

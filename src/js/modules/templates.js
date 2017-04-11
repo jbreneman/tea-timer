@@ -47,6 +47,16 @@ Vue.component('countdown', {
 
 Vue.component('options', {
     computed: {
+        active() {
+            return this.$store.state.interval !== null;
+        },
+        height() {
+            if (this.active) {
+                return `${ this.$store.state.settings.height * .67 }px`;
+            } else {
+                return `${ this.$store.state.settings.height }px`;
+            }
+        },
         navOptions() {
             return this.$store.state.navOptions;
         },
@@ -58,7 +68,7 @@ Vue.component('options', {
         }
     },
 	template: `
-	<section class="timer-opts">
+	<section class="timer-opts" :style="{ height: height }">
         <options-nav :nav-options="navOptions" :active-nav="activeNav"></options-nav>
         <options-section-timer :timers="timers" :class="{ 'active': activeNav === 'timers' }"></options-section-timer>
         <options-section :class="{ 'active': activeNav === 'options' }"></options-section>
@@ -82,16 +92,35 @@ Vue.component('options-nav', {
 Vue.component('options-section', {
 	props: ['timers'],
 	template: `
-	<section class="timer-opts__section">
+	<section class="timer-opts__section options">
 		options
 	</section>`
 });
 
 Vue.component('options-section-timer', {
 	props: ['timers'],
+    computed: {
+        emptyTimer() {
+            let id = 0;
+
+            if (this.$store.state.timers) {
+                id = Math.max(...this.$store.state.timers.map(timer => timer.id)) + 1;
+            }
+
+            return {
+                active: false,
+                amount: 0,
+                countdown: 0,
+                desc: "New Timer",
+                id: id,
+                playing: false
+            }
+        }
+    },
 	template: `
 	<section class="timer-opts__section">
 		<timer-item v-for="timer in timers" :timer="timer" :key="timer.id"></timer-item>
+        <timer-item :timer="emptyTimer" :key="emptyTimer.id"></timer-item>
 	</section>`
 });
 
