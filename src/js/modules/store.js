@@ -1,5 +1,6 @@
 import Vue from '../libs/vue';
 import Vuex from '../libs/vuex';
+import * as storage from './storage';
 
 Vue.use(Vuex);
 
@@ -12,22 +13,7 @@ const store = new Vuex.Store({
 		navOptions: ['timers', 'options'],
 		activeNav: 'timers',
 		interval: null,
-		timers: [{
-			id: 1,
-			amount: 10,
-			countdown: 60,
-			desc: 'Tea -- long timer',
-			active: false,
-			playing: false
-		},
-		{
-			id: 2,
-			amount: 240,
-			countdown: 240,
-			desc: 'Tea -- short timer',
-			active: false,
-			playing: false
-		}]
+		timers: storage.get('timers')
 	},
 	mutations: {
 		updateSizes(state, mutation) {
@@ -41,6 +27,8 @@ const store = new Vuex.Store({
 			state.timers.forEach((timer, index) => {
 				state.timers[index] = timer.id === mutation.id ? mutation : timer;
 			});
+
+			storage.set('timers', state.timers);
 		},
 		startTimer(state, mutation) {
 			window.clearInterval(state.interval);
@@ -53,6 +41,7 @@ const store = new Vuex.Store({
 			state.interval = window.setInterval(()=> {
 				if (active.countdown > 0) {
 					active.countdown--;
+					storage.set('timers', state.timers);
 				} else {
 					window.clearInterval(state.interval);
 				}

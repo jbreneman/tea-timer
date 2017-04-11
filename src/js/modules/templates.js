@@ -15,7 +15,7 @@ Vue.component('timer-title', {
 Vue.component('countdown', {
 	computed: {
         active() {
-            return this.$store.state.timers.filter(timer => timer.active).length > 0;
+            return this.$store.state.interval !== null;
         },
         activeTimer() {
             return this.$store.state.timers.filter(timer => timer.active)[0] || null;
@@ -122,12 +122,11 @@ Vue.component('timer-item', {
     		methods: {
     			inputMinutes: function() {
     				const amount = parseInt(this.$el.querySelector('.timer-item__minutes').value) * 60 + parseInt(this.seconds);
-                    this.$store.commit('setTimer', { id: this.timer.id, amount: +amount, desc: this.timer.desc });
+                    this.$store.commit('setTimer', { id: this.timer.id, amount: +amount, countdown: +amount, desc: this.timer.desc });
     			},
     			inputSeconds: function() {
-                    console.log(this.$el.querySelector('.timer-item__seconds').value);
     				const amount = parseInt(this.minutes) * 60 + parseInt(this.$el.querySelector('.timer-item__seconds').value);
-                    this.$store.commit('setTimer', { id: this.timer.id, amount: +amount, desc: this.timer.desc });
+                    this.$store.commit('setTimer', { id: this.timer.id, amount: +amount, countdown: +amount, desc: this.timer.desc });
     			}
     		}
     	},
@@ -136,7 +135,7 @@ Vue.component('timer-item', {
     		template: `<div class="timer-item__desc" contenteditable="true" @input="newInput">{{ timer.desc }}</div>`,
     		methods: {
     			newInput: function(e) {
-                    this.$store.commit('setTimer', { id: this.timer.id, amount: this.timer.amount, desc:  e.target.innerText });
+                    this.$store.commit('setTimer', { id: this.timer.id, amount: this.timer.amount, countdown: this.timer.amount, desc:  e.target.innerText });
     			}
     		}
     	},
