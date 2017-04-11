@@ -1,5 +1,5 @@
 .timer-countdown {
-	background-color: $color-light;
+	background-color: rgba($color-light, .2);
 	flex-shrink: 0;
 	transition: height $easing--default;
 	height: 0;

@@ -77,7 +77,8 @@ body {
 .timer-title {
   width: 100%;
   -ms-flex-negative: 0;
-      flex-shrink: 0; }
+      flex-shrink: 0;
+  margin-bottom: -15px; }
   .timer-title__heading {
     font-family: "Peace Sans", sans-serif;
     font-size: 4rem;
@@ -87,13 +88,17 @@ body {
     color: #F1E1C8;
     text-align: right;
     padding: 0 5px 0 0;
-    line-height: .57; }
+    line-height: 1;
+    background: -webkit-linear-gradient(left, #b2d6c7, #d0baaa);
+    background: linear-gradient(to right, #b2d6c7, #d0baaa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; }
   .timer-title__small {
     font-size: 1rem;
     letter-spacing: 0; }
 
 .timer-countdown {
-  background-color: #F1E1C8;
+  background-color: rgba(241, 225, 200, 0.2);
   -ms-flex-negative: 0;
       flex-shrink: 0;
   -webkit-transition: height 0.24s ease-in;
@@ -127,7 +132,7 @@ body {
       text-align: left; }
 
 .timer-opts {
-  background-color: #e7cb9f;
+  background-color: rgba(0, 0, 0, 0.2);
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
@@ -144,27 +149,26 @@ body {
   .timer-opts__nav {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
-    background-color: #ecd6b4; }
+    display: flex; }
   .timer-opts__link {
     font-family: Oswald, sans-serif;
     font-size: 1.5rem;
     color: #222222;
     padding: 1rem 2rem;
-    background-color: rgba(255, 255, 255, 0);
     border: 0;
     -webkit-transition: background-color 0.24s ease-in;
     transition: background-color 0.24s ease-in;
     cursor: pointer;
     -webkit-appearance: none;
-    outline: none; }
+    outline: none;
+    background-color: rgba(241, 225, 200, 0.4); }
     .timer-opts__link:not(:last-of-type) {
       margin-right: 1px; }
     .timer-opts__link:hover {
       background-color: #e9d0aa; }
     .timer-opts__link.active {
-      background-color: #e7cb9f;
-      cursor: default; }
+      cursor: default;
+      background-color: rgba(255, 255, 255, 0); }
   .timer-opts__section {
     height: 100%;
     margin: 1rem;
@@ -174,6 +178,11 @@ body {
     transition: opacity 0.24s ease-in; }
     .timer-opts__section.active {
       opacity: 1; }
+  .timer-opts__fill {
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    background-color: rgba(241, 225, 200, 0.4); }
 
 .timer-item {
   width: 100%;
@@ -183,11 +192,11 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #F1E1C8;
+  background-color: rgba(241, 225, 200, 0.4);
   padding: 2rem;
   position: relative; }
   .timer-item:not(:last-of-type) {
-    margin-bottom: .5rem; }
+    margin-bottom: .25rem; }
   .timer-item__about {
     -webkit-box-flex: 1;
         -ms-flex-positive: 1;
@@ -233,12 +242,20 @@ body {
     transition: background-color 0.24s ease-in;
     cursor: pointer;
     -webkit-appearance: none;
-    outline: none; }
+       -moz-appearance: none;
+            appearance: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent; }
     .timer-item__button:hover {
-      background-color: #ecd6b4; }
-    .timer-item__button:active .icon-arrow {
-      -webkit-transform: translateX(3px);
-              transform: translateX(3px); }
+      background-color: rgba(241, 225, 200, 0.2); }
+    .timer-item__button:focus {
+      background-color: rgba(255, 255, 255, 0); }
+    .timer-item__button:active {
+      background-color: rgba(241, 225, 200, 0.4); }
+      .timer-item__button:active .icon-arrow {
+        -webkit-transform: translateX(3px);
+                transform: translateX(3px); }
     .timer-item__button .icon-arrow {
       width: 60%;
       -webkit-transition: -webkit-transform 0.24s ease-in;
@@ -275,4 +292,6 @@ body {
         -ms-flex-positive: 1;
             flex-grow: 1;
     z-index: 0;
-    background-color: #F1E1C8; }
+    background-color: #F1E1C8;
+    background-image: -webkit-linear-gradient(left top, #A2D3C7, #EF8E7D);
+    background-image: linear-gradient(to right bottom, #A2D3C7, #EF8E7D); }

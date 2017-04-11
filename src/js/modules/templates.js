@@ -70,6 +70,7 @@ Vue.component('options-nav', {
 	template: `
 	<nav class="timer-opts__nav">
         <button class="timer-opts__link" :class="{ 'active': activeNav === option }" @click="changeNav(option)" v-for="option in navOptions">{{ option }}</button>
+        <span class="timer-opts__fill"></span>
     </nav>`,
     methods: {
     	changeNav: function(opt) {

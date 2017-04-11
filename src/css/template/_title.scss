@@ -1,6 +1,7 @@
 .timer-title {
 	width: 100%;
 	flex-shrink: 0;
+	margin-bottom: -15px;
 
 	&__heading {
 		font-family: $peace-sans;
@@ -11,7 +12,10 @@
 		color: $color-light;
 		text-align: right;
 		padding: 0 5px 0 0;
-		line-height: .57;
+		line-height: 1;
+		background: linear-gradient(to right, #b2d6c7, #d0baaa);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
 	}
 
 	&__small {
