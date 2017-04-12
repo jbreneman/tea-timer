@@ -34,25 +34,32 @@ const store = new Vuex.Store({
 
 			storage.set('timers', state.timers);
 		},
-		startTimer(state, mutation) {
-			window.clearInterval(state.interval);
-			state.timers.forEach((timer) => {
-				timer.active = timer.id === mutation.id;
-				timer.playing = timer.id === mutation.id;
-			});
+		toggleTimer(state, mutation) {
+			const playing = state.timers.filter(timer => timer.id === mutation.id)[0];
 
-			const active = state.timers.filter(timer => timer.active)[0];
-			state.interval = window.setInterval(()=> {
-				if (active.countdown > 0) {
-					active.countdown--;
-					storage.set('timers', state.timers);
-				} else {
-					window.clearInterval(state.interval);
-					active.playing = false;
-					active.countdown = active.amount;
-					storage.set('timers', state.timers);
-				}
-			}, 1000);
+			if (playing && playing.playing && state.interval) {
+				window.clearInterval(state.interval);
+				playing.playing = false;
+			} else {
+				window.clearInterval(state.interval);
+				state.timers.forEach((timer) => {
+					timer.active = timer.id === mutation.id;
+					timer.playing = timer.id === mutation.id;
+				});
+
+				const active = state.timers.filter(timer => timer.active)[0];
+				state.interval = window.setInterval(()=> {
+					if (active.countdown > 0) {
+						active.countdown--;
+						storage.set('timers', state.timers);
+					} else {
+						window.clearInterval(state.interval);
+						active.playing = false;
+						active.countdown = active.amount;
+						storage.set('timers', state.timers);
+					}
+				}, 1000);
+			}
 		}
 	}
 });

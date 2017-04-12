@@ -202,12 +202,16 @@ body {
       cursor: default;
       background-color: rgba(255, 255, 255, 0); }
   .timer-opts__section {
+    position: relative;
+    z-index: 0;
     height: 100%;
     padding: 1rem;
     overflow: hidden;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     opacity: 0;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
     -webkit-transition: opacity 0.24s ease-in;
     transition: opacity 0.24s ease-in; }
     .timer-opts__section.active {
@@ -290,17 +294,33 @@ body {
       background-color: rgba(255, 255, 255, 0); }
     .timer-item__button:active {
       background-color: rgba(241, 225, 200, 0.4); }
-      .timer-item__button:active .icon-arrow {
-        -webkit-transform: translateX(3px);
-                transform: translateX(3px); }
     .timer-item__button .icon-arrow {
-      width: 60%;
-      -webkit-transition: -webkit-transform 0.24s ease-in;
-      transition: -webkit-transform 0.24s ease-in;
-      transition: transform 0.24s ease-in;
-      transition: transform 0.24s ease-in, -webkit-transform 0.24s ease-in; }
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate3d(-50%, -50%, 0);
+              transform: translate3d(-50%, -50%, 0);
+      width: 2rem;
+      -webkit-transition: opacity 0.24s ease-in;
+      transition: opacity 0.24s ease-in; }
       .timer-item__button .icon-arrow path {
         fill: #222222; }
+      .timer-item__button .icon-arrow.playing {
+        opacity: 0; }
+    .timer-item__button .icon-pause {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate3d(-50%, -50%, 0);
+              transform: translate3d(-50%, -50%, 0);
+      width: 2rem;
+      -webkit-transition: opacity 0.24s ease-in;
+      transition: opacity 0.24s ease-in;
+      opacity: 0; }
+      .timer-item__button .icon-pause path {
+        fill: #222222; }
+      .timer-item__button .icon-pause.playing {
+        opacity: 1; }
 
 .timer {
   position: relative;

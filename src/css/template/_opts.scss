@@ -39,12 +39,15 @@
 	}
 
 	&__section {
+		position: relative;
+		z-index: 0;
 		height: 100%;
 		padding: 1rem;
 		overflow: hidden;
 		overflow-y: scroll;
 		-webkit-overflow-scrolling: touch;
 		opacity: 0;
+		transform: translateZ(0);
 		transition: opacity $easing--default;
 
 		&.active {
@@ -139,18 +142,40 @@
 
 		&:active {
 			background-color: rgba($color-light, .4);
-
-			.icon-arrow {
-				transform: translateX(3px);
-			}
 		}
 
 		.icon-arrow {
-			width: 60%;
-			transition: transform $easing--default;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate3d(-50%, -50%, 0);
+			width: 2rem;
+			transition: opacity $easing--default;
 
 			path {
 				fill: $color-dark;
+			}
+
+			&.playing {
+				opacity: 0;
+			}
+		}
+
+		.icon-pause {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate3d(-50%, -50%, 0);
+			width: 2rem;
+			transition: opacity $easing--default;
+			opacity: 0;
+
+			path {
+				fill: $color-dark;
+			}
+
+			&.playing {
+				opacity: 1;
 			}
 		}
 	}

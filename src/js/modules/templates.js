@@ -132,7 +132,7 @@ Vue.component('timer-item', {
             <amount :timer="timer"></amount>
             <description :timer="timer"></description>
         </section>
-        <go-button :id="timer.id"></go-button>
+        <go-button :timer="timer"></go-button>
     </div>`,
     components: {
     	'amount': {
@@ -170,16 +170,24 @@ Vue.component('timer-item', {
     		}
     	},
     	'go-button': {
-            props: ['id'],
+            props: ['timer'],
+            computed: {
+                playing() {
+                    return this.timer.playing && this.$store.state.interval;
+                }
+            },
     		template: `
-    		<button class="timer-item__button" @click="startTimer(id)">
-    		    <svg class="icon-arrow" viewBox="0 0 64 64">
+    		<button class="timer-item__button" @click="toggleTimer(timer.id)">
+    		    <svg class="icon-arrow" viewBox="0 0 64 64" :class="{ playing: playing }">
     		        <path d="m 10.966268,58.441755 0,-25.628195 0,-25.6281938 L 33.160936,19.999464 55.355602,32.81356 33.160934,45.627658 Z" />
     		    </svg>
+                <svg class="icon-pause" viewBox="0 0 32 32" :class="{ playing: playing }">
+                    <path d="M4 4h10v24h-10zM18 4h10v24h-10z"></path>
+                </svg>
     		</button>`,
             methods: {
-                startTimer: function(id) {
-                    this.$store.commit('startTimer', { id: id });
+                toggleTimer: function(id) {
+                    this.$store.commit('toggleTimer', { id: id });
                 }
             }
     	}
