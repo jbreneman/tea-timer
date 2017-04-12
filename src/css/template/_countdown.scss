@@ -5,10 +5,19 @@
 	height: 0;
 	overflow: hidden;
 
+	&--narrow {
+		.timer-countdown {
+			&__text {
+				transform: translate3d(-35%, 0, 0) scale3d(.33, .33, 1);
+			}
+		}
+	}
+
 	&__content {
-		padding: 3rem 2rem;
+		padding: 1rem .5rem;
 		display: flex;
 		justify-content: center;
+		align-items: center;
 		height: 100%;
 	}
 
@@ -19,6 +28,8 @@
 		color: $color-dark;
 		display: flex;
 		justify-content: center;
+		align-items: center;
+		transition: transform $easing--default;
 	}
 
 	&__character-wrap {

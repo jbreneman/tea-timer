@@ -110,14 +110,20 @@ body {
   transition: height 0.24s ease-in;
   height: 0;
   overflow: hidden; }
+  .timer-countdown--narrow .timer-countdown__text {
+    -webkit-transform: translate3d(-35%, 0, 0) scale3d(0.33, 0.33, 1);
+            transform: translate3d(-35%, 0, 0) scale3d(0.33, 0.33, 1); }
   .timer-countdown__content {
-    padding: 3rem 2rem;
+    padding: 1rem .5rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     height: 100%; }
   .timer-countdown__text {
     width: 100%;
@@ -129,7 +135,14 @@ body {
     display: flex;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
-            justify-content: center; }
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-transition: -webkit-transform 0.24s ease-in;
+    transition: -webkit-transform 0.24s ease-in;
+    transition: transform 0.24s ease-in;
+    transition: transform 0.24s ease-in, -webkit-transform 0.24s ease-in; }
   .timer-countdown__character-wrap {
     display: -webkit-box;
     display: -ms-flexbox;

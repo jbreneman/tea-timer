@@ -15,10 +15,19 @@ Vue.component('timer-title', {
 Vue.component('countdown', {
 	computed: {
         active() {
-            return this.$store.state.interval !== null;
+            return this.activeTimer && this.activeTimer.playing && this.$store.state.interval;
         },
         activeTimer() {
-            return this.$store.state.timers.filter(timer => timer.active)[0] || null;
+            return this.$store.state.timers.filter(timer => timer.active)[0] || false;
+        },
+        height() {
+            if (this.active && this.activeTimer) {
+                return `${ this.$store.state.settings.height * .33 }px`;
+            } else if(this.activeTimer && !this.active) {
+                return `4rem`;
+            } else {
+                return `0`;
+            }
         },
         formattedTotal() {
             const formatted = util.formatTime(this.activeTimer.amount);
@@ -30,19 +39,12 @@ Vue.component('countdown', {
         }
 	},
 	template: `
-    	<section class="timer-countdown">
-            <div class="timer-countdown__content" v-if="active">
+    	<section class="timer-countdown" :style="{ height: height }" :class="{ 'timer-countdown--narrow': activeTimer && !active }">
+            <div class="timer-countdown__content" v-if="activeTimer">
                 <div class="timer-countdown__text" v-html="formattedCountdown"></div>
             </div>
         </section>
-    `,
-    updated: function() {
-        if (this.active) {
-            this.$el.style.height = `${ this.$store.state.settings.height * .33 }px`;
-        } else {
-            this.$el.style.height = `0`;
-        }
-    }
+    `
 });
 
 Vue.component('options', {
@@ -50,11 +52,16 @@ Vue.component('options', {
         active() {
             return this.$store.state.interval !== null;
         },
+        activeTimer() {
+            return this.$store.state.timers.filter(timer => timer.active)[0] || false;
+        },
         height() {
-            if (this.active) {
+            if (this.active && this.activeTimer) {
                 return `${ this.$store.state.settings.height * .67 }px`;
+            } else if(this.activeTimer && !this.active) {
+                return `calc(${ this.$store.state.settings.height } - 4rem)`;
             } else {
-                return `${ this.$store.state.settings.height }px`;
+                return `0`;
             }
         },
         navOptions() {
