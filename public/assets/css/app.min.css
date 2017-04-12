@@ -188,6 +188,7 @@ body {
     font-size: 1.5rem;
     color: #222222;
     padding: 1rem 2rem;
+    margin: 0;
     border: 0;
     -webkit-transition: background-color 0.24s ease-in;
     transition: background-color 0.24s ease-in;
@@ -197,15 +198,15 @@ body {
     background-color: rgba(241, 225, 200, 0.4); }
     .timer-opts__link:not(:last-of-type) {
       margin-right: 1px; }
-    .timer-opts__link:hover {
-      background-color: #e9d0aa; }
     .timer-opts__link.active {
       cursor: default;
       background-color: rgba(255, 255, 255, 0); }
   .timer-opts__section {
     height: 100%;
     padding: 1rem;
-    overflow: scroll;
+    overflow: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     opacity: 0;
     -webkit-transition: opacity 0.24s ease-in;
     transition: opacity 0.24s ease-in; }
@@ -249,6 +250,7 @@ body {
     width: 100%; }
   .timer-item__amount {
     width: 50px;
+    padding: 0;
     font-family: Gilroy, sans-serif;
     color: #222222;
     background-color: rgba(255, 255, 255, 0);

@@ -16,6 +16,7 @@
 		font-size: 1.5rem;
 		color: $color-dark;
 		padding: 1rem 2rem;
+		margin: 0;
 		border: 0;
 		transition: background-color $easing--default;
 		cursor: pointer;
@@ -28,7 +29,7 @@
 		}
 
 		&:hover {
-			background-color: darken($color-light, 7.5%);
+			//background-color: darken($color-light, 7.5%);
 		}
 
 		&.active {
@@ -40,7 +41,9 @@
 	&__section {
 		height: 100%;
 		padding: 1rem;
-		overflow: scroll;
+		overflow: hidden;
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
 		opacity: 0;
 		transition: opacity $easing--default;
 
@@ -87,6 +90,7 @@
 
 	&__amount {
 		width: 50px;
+		padding: 0;
 		font-family: $gilroy;
 		color: $color-dark;
 		background-color: rgba(white, 0);
