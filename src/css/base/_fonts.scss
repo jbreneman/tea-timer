@@ -1,10 +1,20 @@
 @font-face {
-    font-family: 'Peace Sans';
-    src: url('../fonts/peacesans.woff2') format('woff2'),
-         url('../fonts/peacesans.woff') format('woff');
-    font-weight: normal;
+    font-family: 'Gilroy';
+    src: url('../fonts/gilroy-light-webfont.woff2') format('woff2'),
+         url('../fonts/gilroy-light-webfont.woff') format('woff');
+    font-weight: 300;
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Gilroy';
+    src: url('../fonts/gilroy-extrabold-webfont.woff2') format('woff2'),
+         url('../fonts/gilroy-extrabold-webfont.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+
+}
+
+$gilroy: Gilroy, sans-serif;
 $peace-sans: 'Peace Sans', sans-serif;
 $oswald: Oswald, sans-serif;

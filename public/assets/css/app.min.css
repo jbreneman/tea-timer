@@ -1,7 +1,13 @@
 @font-face {
-  font-family: 'Peace Sans';
-  src: url("../fonts/peacesans.woff2") format("woff2"), url("../fonts/peacesans.woff") format("woff");
-  font-weight: normal;
+  font-family: 'Gilroy';
+  src: url("../fonts/gilroy-light-webfont.woff2") format("woff2"), url("../fonts/gilroy-light-webfont.woff") format("woff");
+  font-weight: 300;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url("../fonts/gilroy-extrabold-webfont.woff2") format("woff2"), url("../fonts/gilroy-extrabold-webfont.woff") format("woff");
+  font-weight: 800;
   font-style: normal; }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -71,19 +77,18 @@ body {
           align-items: center;
   height: 100vh;
   font-family: Oswald, sans-serif;
-  color: #222222;
-  padding: 1rem; }
+  color: #222222; }
 
 .timer-title {
   width: 100%;
   -ms-flex-negative: 0;
       flex-shrink: 0;
-  margin-bottom: -15px; }
+  margin-bottom: -10px; }
   .timer-title__heading {
-    font-family: "Peace Sans", sans-serif;
+    font-family: Gilroy, sans-serif;
+    font-weight: 800;
     font-size: 4rem;
     text-transform: uppercase;
-    font-weight: 400;
     letter-spacing: -3px;
     color: #F1E1C8;
     text-align: right;
@@ -115,20 +120,46 @@ body {
             justify-content: center;
     height: 100%; }
   .timer-countdown__text {
-    font-family: "Peace Sans", sans-serif;
+    width: 100%;
+    font-family: Gilroy, sans-serif;
     font-size: 6rem;
     color: #222222;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex; }
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
   .timer-countdown__character-wrap {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex; }
+    display: flex;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+    width: calc(50% - 11px); }
+    .timer-countdown__character-wrap--left {
+      font-weight: 800;
+      -webkit-box-pack: end;
+          -ms-flex-pack: end;
+              justify-content: flex-end; }
+    .timer-countdown__character-wrap--right {
+      font-weight: 300;
+      -webkit-box-pack: start;
+          -ms-flex-pack: start;
+              justify-content: flex-start; }
+  .timer-countdown__center {
+    width: 22px;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+    text-align: center;
+    font-size: .9em; }
   .timer-countdown__character {
     text-align: right; }
     .timer-countdown__character + .timer-countdown__character {
-      width: 73px;
+      width: 61px;
       text-align: left; }
 
 .timer-opts {
@@ -218,7 +249,7 @@ body {
     width: 100%; }
   .timer-item__amount {
     width: 50px;
-    font-family: "Peace Sans", sans-serif;
+    font-family: Gilroy, sans-serif;
     color: #222222;
     background-color: rgba(255, 255, 255, 0);
     border: 0;
@@ -271,9 +302,9 @@ body {
 
 .timer {
   position: relative;
-  width: calc(100vh - 2rem);
+  width: 100vw;
   max-width: 475px;
-  height: calc(100vh - 2rem);
+  height: 100vh;
   max-height: 775px;
   display: -webkit-box;
   display: -ms-flexbox;

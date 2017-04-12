@@ -26,7 +26,7 @@ Vue.component('countdown', {
         },
         formattedCountdown() {
             const formatted = util.splitTime(this.activeTimer.countdown);
-            return `<span class="timer-countdown__character-wrap">${ formatted.minutes }</span>:<span class="timer-countdown__character-wrap">${ formatted.seconds }</span>`;
+            return `<span class="timer-countdown__character-wrap timer-countdown__character-wrap--left">${ formatted.minutes }</span><span class="timer-countdown__center">:</span><span class="timer-countdown__character-wrap timer-countdown__character-wrap--right">${ formatted.seconds }</span>`;
         }
 	},
 	template: `

@@ -1,13 +1,13 @@
 .timer-title {
 	width: 100%;
 	flex-shrink: 0;
-	margin-bottom: -15px;
+	margin-bottom: -10px;
 
 	&__heading {
-		font-family: $peace-sans;
+		font-family: $gilroy;
+		font-weight: 800;
 		font-size: 4rem;
 		text-transform: uppercase;
-		font-weight: 400;
 		letter-spacing: -3px;
 		color: $color-light;
 		text-align: right;

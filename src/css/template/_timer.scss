@@ -4,9 +4,9 @@
 
 .timer {
 	position: relative;
-	width: calc(100vh - 2rem);
+	width: 100vw;
 	max-width: 475px;
-	height: calc(100vh - 2rem);
+	height: 100vh;
 	max-height: 775px;
 	display: flex;
 	flex-direction: column;
