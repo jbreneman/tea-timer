@@ -48,9 +48,11 @@ const store = new Vuex.Store({
 				});
 
 				const active = state.timers.filter(timer => timer.active)[0];
+				active.times = active.times || {};
+				active.times.end = Date.now() + (active.countdown * 1000);
 				state.interval = window.setInterval(()=> {
 					if (active.countdown > 0) {
-						active.countdown--;
+						active.countdown = Math.ceil((active.times.end - Date.now()) / 1000);
 						storage.set('timers', state.timers);
 					} else {
 						window.clearInterval(state.interval);
@@ -58,7 +60,7 @@ const store = new Vuex.Store({
 						active.countdown = active.amount;
 						storage.set('timers', state.timers);
 					}
-				}, 1000);
+				}, 16);
 			}
 		}
 	}
