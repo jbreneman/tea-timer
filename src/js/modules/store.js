@@ -24,9 +24,20 @@ const store = new Vuex.Store({
 			state.activeNav = mutation;
 		},
 		setTimer(state, mutation) {
+
+			const playing = state.timers.filter(timer => timer.id === mutation.id)[0];
+			if (playing && playing.playing && state.interval) {
+				window.clearInterval(state.interval);
+				playing.playing = false;
+			}
+
 			if (state.timers && state.timers.filter(timer => timer.id === mutation.id).length > 0) {
 				state.timers.forEach((timer, index) => {
-					state.timers[index] = timer.id === mutation.id ? mutation : timer;
+					if (timer.id === mutation.id) {
+						Object.keys(mutation).forEach(function(key) {
+						    timer[key] = mutation[key];
+						});
+					}
 				});
 			} else {
 				state.timers.push(mutation);
