@@ -59,7 +59,7 @@ Vue.component('options', {
             if (this.active && this.activeTimer) {
                 return `${ this.$store.state.settings.height * .67 }px`;
             } else if(this.activeTimer && !this.active) {
-                return `calc(${ this.$store.state.settings.height } - 4rem)`;
+                return `calc(${ this.$store.state.settings.height }px - 4rem)`;
             } else {
                 return `0`;
             }
