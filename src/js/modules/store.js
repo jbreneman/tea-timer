@@ -1,5 +1,5 @@
-import Vue from '../libs/vue';
-import Vuex from '../libs/vuex';
+import Vue from 'vue';
+import Vuex from 'vuex';
 import * as storage from './storage';
 import * as config from '../config';
 

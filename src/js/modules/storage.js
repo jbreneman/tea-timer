@@ -1,4 +1,4 @@
-import isString from '../libs/lodash/isString';
+import isString from 'lodash/isString';
 
 function get(key, isObject = true) {
 	if (isString(key) && key !== '') {

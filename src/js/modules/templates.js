@@ -1,9 +1,6 @@
-import Vue from '../libs/vue';
-import Vuex from '../libs/vuex';
-import store from '../modules/store';
+import Vue from 'vue';
 import * as util from './util';
-import range from '../libs/lodash/range';
-import throttle from '../libs/lodash/throttle';
+import throttle from 'lodash/throttle';
 
 Vue.component('timer-title', {
 	template: `
@@ -203,11 +200,6 @@ Vue.component('timer-item', {
                 return {
                     minutes: Math.floor(this.timer.amount / 60),
                     seconds: this.timer.amount % 60
-                }
-            },
-            computed: {
-                timeRange() {
-                    return range(60);
                 }
             },
             methods: {

@@ -1,6 +1,6 @@
 'use strict';
 
-import Vue from './libs/vue';
+import Vue from 'vue';
 import './modules/filters';
 import './modules/templates';
 import { store } from './modules/store';
