@@ -21,6 +21,8 @@
 		cursor: pointer;
 		-webkit-appearance: none;
 		outline: none;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+		-webkit-tap-highlight-color: transparent;
 		background-color: rgba($color-light, .2);
 
 		&:not(:last-of-type) {
@@ -97,6 +99,12 @@
 	&__time {
 		width: 100%;
 		margin-bottom: .5rem;
+	}
+
+	&__separator {
+		font-size: 1.75rem;
+		font-family: $gilroy;
+		margin: 0 .15rem;
 	}
 
 	&__amount {
@@ -224,9 +232,9 @@
 	}
 
 	&__spinner {
+		position: relative;
 		display: flex;
 		flex-direction: column;
-		overflow: hidden;
 		height: 50%;
 		margin: auto 2rem;
 		justify-content: center;
@@ -234,10 +242,39 @@
 
 		&:first-of-type {
 			margin-right: .25rem;
+
+			&::before, &::after {
+				left: 50%;
+			}
 		}
 
 		&:last-of-type {
 			margin-left: .25rem;
+
+			&::before, &::after {
+				left: calc(50% - .6rem);
+			}
+		}
+
+		&::before, &::after {
+			content: '';
+			position: absolute;
+			left: calc(50% - .3rem);
+			width: .6rem;
+			height: .6rem;
+			transform: rotate(45deg);
+		}
+
+		&::before {
+			top: -.35rem;
+			border-top: 1px solid rgba($color-primary, .6);
+			border-left: 1px solid rgba($color-primary, .6);
+		}
+
+		&::after {
+			bottom: -.35rem;
+			border-bottom: 1px solid rgba($color-primary, .6);
+			border-right: 1px solid rgba($color-primary, .6);
 		}
 	}
 

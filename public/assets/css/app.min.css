@@ -204,6 +204,8 @@ body {
     cursor: pointer;
     -webkit-appearance: none;
     outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent;
     background-color: rgba(241, 225, 200, 0.2); }
     .timer-opts__link:not(:last-of-type) {
       margin-right: 1px; }
@@ -281,6 +283,10 @@ body {
   .timer-item__time {
     width: 100%;
     margin-bottom: .5rem; }
+  .timer-item__separator {
+    font-size: 1.75rem;
+    font-family: Gilroy, sans-serif;
+    margin: 0 .15rem; }
   .timer-item__amount {
     padding: 0;
     font-family: Gilroy, sans-serif;
@@ -397,6 +403,7 @@ body {
     font-weight: 700;
     opacity: .75; }
   .timer-edit__spinner {
+    position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -404,7 +411,6 @@ body {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    overflow: hidden;
     height: 50%;
     margin: auto 2rem;
     -webkit-box-pack: center;
@@ -415,8 +421,28 @@ body {
             align-items: center; }
     .timer-edit__spinner:first-of-type {
       margin-right: .25rem; }
+      .timer-edit__spinner:first-of-type::before, .timer-edit__spinner:first-of-type::after {
+        left: 50%; }
     .timer-edit__spinner:last-of-type {
       margin-left: .25rem; }
+      .timer-edit__spinner:last-of-type::before, .timer-edit__spinner:last-of-type::after {
+        left: calc(50% - .6rem); }
+    .timer-edit__spinner::before, .timer-edit__spinner::after {
+      content: '';
+      position: absolute;
+      left: calc(50% - .3rem);
+      width: .6rem;
+      height: .6rem;
+      -webkit-transform: rotate(45deg);
+              transform: rotate(45deg); }
+    .timer-edit__spinner::before {
+      top: -.35rem;
+      border-top: 1px solid rgba(115, 96, 56, 0.6);
+      border-left: 1px solid rgba(115, 96, 56, 0.6); }
+    .timer-edit__spinner::after {
+      bottom: -.35rem;
+      border-bottom: 1px solid rgba(115, 96, 56, 0.6);
+      border-right: 1px solid rgba(115, 96, 56, 0.6); }
   .timer-edit__spinner-item {
     -ms-flex-negative: 0;
         flex-shrink: 0;

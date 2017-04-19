@@ -155,7 +155,7 @@ Vue.component('timer-item', {
     		},
     		template: `
         		<div class="timer-item__time" @click="showEdit()">
-                    <span class="timer-item__amount timer-item__minutes">{{ minutes }}</span>:<span class="timer-item__amount timer-item__seconds">{{ seconds }}</span>
+                    <span class="timer-item__amount timer-item__minutes">{{ minutes }}</span><span class="timer-item__separator">:</span><span class="timer-item__amount timer-item__seconds">{{ seconds }}</span>
         		</div>`,
     		methods: {
     			showEdit: function() {
@@ -219,14 +219,16 @@ Vue.component('timer-item', {
                 <v-touch class="timer-edit"
                     v-on:swipe="saveTime"
                     v-bind:swipe-options="{ direction: 'right', threshold: 20 }">
-                    <span class="timer-edit__title">Edit Time</span>
+                    <span class="timer-edit__title"></span>
                     <v-touch class="timer-edit__spinner"
+                        :class="{ up: activeClass === 'up', down: activeClass === 'down' }"
                         v-on:pan="onPan('minutes', $event)"
                         v-bind:pan-options="{ direction: 'vertical', threshold: 0 }">
                         <span class="timer-edit__spinner-item timer-edit__spinner-item--bold">{{ minutes | leadingZero }}</span>
                     </v-touch>
                     <span class="timer-edit__separator">:</span>
                     <v-touch class="timer-edit__spinner"
+                        :class="{ up: activeClass === 'up', down: activeClass === 'down' }"
                         v-on:pan="onPan('seconds', $event)"
                         v-bind:pan-options="{ direction: 'vertical', threshold: 0 }">
                         <span class="timer-edit__spinner-item">{{ seconds | leadingZero }}</span>
