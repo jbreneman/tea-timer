@@ -150,10 +150,10 @@ Vue.component('timer-item', {
     		props: ['timer'],
     		computed: {
     			minutes() {
-                    return util.formatTime(this.timer.amount)['minutes'];
+                    return util.formatTime(this.timer.amount, true)['minutes'];
                 },
                 seconds() {
-                    return util.formatTime(this.timer.amount)['seconds'];
+                    return util.formatTime(this.timer.amount, true)['seconds'];
                 }
     		},
     		template: `

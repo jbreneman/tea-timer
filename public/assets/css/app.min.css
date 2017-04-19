@@ -72,9 +72,6 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   height: 100vh;
   font-family: Oswald, sans-serif;
   color: #222222; }
@@ -279,7 +276,8 @@ body {
     transition: filter 0.12s ease-out;
     transition: filter 0.12s ease-out, -webkit-filter 0.12s ease-out; }
   .timer-item__minutes {
-    text-align: right; }
+    text-align: right;
+    font-weight: 700; }
   .timer-item__time {
     width: 100%;
     margin-bottom: .5rem; }
