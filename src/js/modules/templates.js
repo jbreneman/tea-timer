@@ -2,6 +2,8 @@ import Vue from '../libs/vue';
 import Vuex from '../libs/vuex';
 import store from '../modules/store';
 import * as util from './util';
+import range from '../libs/lodash/range';
+import throttle from '../libs/lodash/throttle';
 
 Vue.component('timer-title', {
 	template: `
@@ -120,7 +122,8 @@ Vue.component('options-section-timer', {
                 countdown: 0,
                 desc: "New Timer",
                 id: id,
-                playing: false
+                playing: false,
+                editing: false
             }
         }
     },
@@ -135,11 +138,12 @@ Vue.component('timer-item', {
 	props: ['timer'],
 	template: `
 	<div class="timer-item">
-        <section class="timer-item__about">
+        <section class="timer-item__about" :class="{ blurred: timer.editing }">
             <amount :timer="timer"></amount>
             <description :timer="timer"></description>
         </section>
-        <go-button :timer="timer"></go-button>
+        <go-button :timer="timer" :class="{ blurred: timer.editing }"></go-button>
+        <edit-time :timer="timer" :class="{ active: timer.editing }"></edit-time>
     </div>`,
     components: {
     	'amount': {
@@ -153,24 +157,13 @@ Vue.component('timer-item', {
                 }
     		},
     		template: `
-        		<div class="timer-item__time">
-        		  <input type="number" min="0" max="59" class="timer-item__amount timer-item__minutes" :value="minutes" @input="inputMinutes()">:<input type="number" min="0" max="59" class="timer-item__amount timer-item__seconds" :value="seconds" @input="inputSeconds()">
+        		<div class="timer-item__time" @click="showEdit()">
+                    <span class="timer-item__amount timer-item__minutes">{{ minutes }}</span>:<span class="timer-item__amount timer-item__seconds">{{ seconds }}</span>
         		</div>`,
     		methods: {
-    			inputMinutes: function() {
-                    const input = this.$el.querySelector('.timer-item__minutes').value;
-                    if (input !== '') {
-                        const amount = parseInt(input) * 60 + parseInt(this.seconds);
-                        this.$store.commit('setTimer', { id: this.timer.id, amount: +amount, countdown: +amount });
-                    }
-    			},
-    			inputSeconds: function() {
-                    const input = this.$el.querySelector('.timer-item__seconds').value;
-                    if (input !== '') {
-    				    const amount = parseInt(this.minutes) * 60 + parseInt(input);
-                        this.$store.commit('setTimer', { id: this.timer.id, amount: +amount, countdown: +amount, });
-                    }
-                }
+    			showEdit: function() {
+                    this.$store.commit('setTimer', { id: this.timer.id, editing: true });
+    			}
     		}
     	},
     	'description': {
@@ -203,6 +196,53 @@ Vue.component('timer-item', {
                     this.$store.commit('toggleTimer', { id: id });
                 }
             }
-    	}
+    	},
+        'edit-time': {
+            props: ['timer'],
+            data: function() {
+                return {
+                    minutes: Math.floor(this.timer.amount / 60),
+                    seconds: this.timer.amount % 60
+                }
+            },
+            computed: {
+                timeRange() {
+                    return range(60);
+                }
+            },
+            methods: {
+                saveTime() {
+                    const amount = (this.minutes * 60) + this.seconds;
+                    this.$store.commit('setTimer', { id: this.timer.id, amount: amount, countdown: amount, editing: false });
+                },
+                onPan: throttle(function(prop, $event) {
+                    if ($event.additionalEvent === 'panup') {
+                        this[prop] = this[prop] + 1 < 59 ? this[prop] + 1 : 59;
+                    } else if($event.additionalEvent === 'pandown') {
+                        this[prop] = this[prop] - 1 > 0 ? this[prop] - 1 : 0;
+                    }
+                }, 40)
+            },
+            template: `
+                <div class="timer-edit">
+                    <v-touch class="timer-edit__spinner"
+                        v-on:pan="onPan('minutes', $event)"
+                        v-bind:pan-options="{ direction: 'vertical', threshold: 0 }">
+                        <span class="timer-edit__spinner-item timer-edit__spinner-item--bold">{{ minutes | leadingZero }}</span>
+                    </v-touch>
+                    <span class="timer-edit__separator">:</span>
+                    <v-touch class="timer-edit__spinner"
+                        v-on:pan="onPan('seconds', $event)"
+                        v-bind:pan-options="{ direction: 'vertical', threshold: 0 }">
+                        <span class="timer-edit__spinner-item">{{ seconds | leadingZero }}</span>
+                    </v-touch>
+                    <button class="timer-item__button" @click="saveTime()">
+                        <svg class="icon-check" viewBox="0 0 32 32">
+                            <path d="M27 4l-15 15-7-7-5 5 12 12 20-20z"></path>
+                        </svg>
+                    </button>
+                </div>
+            `
+        }
     }
 });

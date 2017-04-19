@@ -1,8 +1,12 @@
 'use strict';
 
 import Vue from './libs/vue';
+import './modules/filters';
 import './modules/templates';
 import { store } from './modules/store';
+import VueTouch from 'vue-touch'
+
+Vue.use(VueTouch, {name: 'v-touch'})
 
 const vm = new Vue({
 	el: '#app',
