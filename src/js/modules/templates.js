@@ -219,6 +219,7 @@ Vue.component('timer-item', {
                 <v-touch class="timer-edit"
                     v-on:swipe="saveTime"
                     v-bind:swipe-options="{ direction: 'right', threshold: 20 }">
+                    <span class="timer-edit__title">Edit Time</span>
                     <v-touch class="timer-edit__spinner"
                         v-on:pan="onPan('minutes', $event)"
                         v-bind:pan-options="{ direction: 'vertical', threshold: 0 }">
