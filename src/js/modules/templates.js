@@ -216,7 +216,9 @@ Vue.component('timer-item', {
                 }, 40)
             },
             template: `
-                <div class="timer-edit">
+                <v-touch class="timer-edit"
+                    v-on:swipe="saveTime"
+                    v-bind:swipe-options="{ direction: 'right', threshold: 20 }">
                     <v-touch class="timer-edit__spinner"
                         v-on:pan="onPan('minutes', $event)"
                         v-bind:pan-options="{ direction: 'vertical', threshold: 0 }">
@@ -228,12 +230,12 @@ Vue.component('timer-item', {
                         v-bind:pan-options="{ direction: 'vertical', threshold: 0 }">
                         <span class="timer-edit__spinner-item">{{ seconds | leadingZero }}</span>
                     </v-touch>
-                    <button class="timer-item__button" @click="saveTime()">
+                    <button class="timer-item__button" @click="saveTime">
                         <svg class="icon-check" viewBox="0 0 32 32">
                             <path d="M27 4l-15 15-7-7-5 5 12 12 20-20z"></path>
                         </svg>
                     </button>
-                </div>
+                </v-touch>
             `
         }
     }
