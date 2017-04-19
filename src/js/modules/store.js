@@ -1,6 +1,7 @@
 import Vue from '../libs/vue';
 import Vuex from '../libs/vuex';
 import * as storage from './storage';
+import * as config from '../config';
 
 Vue.use(Vuex);
 
@@ -13,7 +14,7 @@ const store = new Vuex.Store({
 		navOptions: ['timers', 'options'],
 		activeNav: 'timers',
 		interval: null,
-		timers: storage.get('timers') || [{"id":1,"amount":20,"countdown":19,"desc":"Tea -- long timer","active":false,"playing":false},{"id":2,"amount":240,"countdown":240,"desc":"Tea -- short timer","active":true,"playing":false},{"id":3,"amount":20,"countdown":20,"desc":"HI"}]
+		timers: +storage.get('version') === config.version ? storage.get('timers') : config.dummy
 	},
 	mutations: {
 		updateSizes(state, mutation) {
