@@ -207,11 +207,11 @@ Vue.component('timer-item', {
                     const amount = (this.minutes * 60) + this.seconds;
                     this.$store.commit('setTimer', { id: this.timer.id, amount: amount, countdown: amount, editing: false });
                 },
-                onPan: throttle(function(prop, $event) {
+                onPan: throttle(function(mutation, $event) {
                     if ($event.additionalEvent === 'panup') {
-                        this[prop] = this[prop] + 1 < 59 ? this[prop] + 1 : 59;
+                        this[mutation.prop] = this[mutation.prop] + 1 < mutation.max ? this[mutation.prop] + 1 : mutation.max;
                     } else if($event.additionalEvent === 'pandown') {
-                        this[prop] = this[prop] - 1 > 0 ? this[prop] - 1 : 0;
+                        this[mutation.prop] = this[mutation.prop] - 1 > 0 ? this[mutation.prop] - 1 : 0;
                     }
                 }, 40)
             },
@@ -222,14 +222,14 @@ Vue.component('timer-item', {
                     <span class="timer-edit__title"></span>
                     <v-touch class="timer-edit__spinner"
                         :class="{ up: activeClass === 'up', down: activeClass === 'down' }"
-                        v-on:pan="onPan('minutes', $event)"
+                        v-on:pan="onPan({ prop: 'minutes', max: 99 }, $event)"
                         v-bind:pan-options="{ direction: 'vertical', threshold: 0 }">
                         <span class="timer-edit__spinner-item timer-edit__spinner-item--bold">{{ minutes | leadingZero }}</span>
                     </v-touch>
                     <span class="timer-edit__separator">:</span>
                     <v-touch class="timer-edit__spinner"
                         :class="{ up: activeClass === 'up', down: activeClass === 'down' }"
-                        v-on:pan="onPan('seconds', $event)"
+                        v-on:pan="onPan({ prop: 'seconds', max: 59 }, $event)"
                         v-bind:pan-options="{ direction: 'vertical', threshold: 0 }">
                         <span class="timer-edit__spinner-item">{{ seconds | leadingZero }}</span>
                     </v-touch>
