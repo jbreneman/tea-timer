@@ -42,8 +42,52 @@ Vue.component('countdown', {
             <div class="timer-countdown__content" v-if="activeTimer">
                 <div class="timer-countdown__text" v-html="formattedCountdown"></div>
             </div>
+            <div class="timer-countdown__controls">
+                <reset-button :timer="activeTimer"></reset-button>
+                <play-button :timer="activeTimer"></play-button>
+            </div>
         </section>
     `
+});
+
+Vue.component('reset-button', {
+    props: ['timer'],
+    methods: {
+        resetTimer: function(n) {
+            this.$store.commit('setTimer', { id: this.timer.id, countdown: this.timer.amount });
+        }
+    },
+    template: `
+        <button class="timer-countdown__button" @click="resetTimer">
+            <svg class="icon icon-reset" viewBox="0 0 32 32">
+                <path d="M24 18c0 4.414-3.586 8-8 8s-8-3.586-8-8 3.586-8 8-8h4l0.023 4.020 6.012-6.020-6.012-6v4h-4.023c-6.625 0-12 5.375-12 12s5.375 12 12 12 12-5.375 12-12h-4z"></path>
+            </svg>
+        </button>
+    `
+});
+
+Vue.component('play-button', {
+    props: ['timer'],
+    computed: {
+        playing() {
+            return this.timer.playing && this.$store.state.interval;
+        }
+    },
+    template: `
+        <button class="timer-countdown__button" @click="toggleTimer(timer.id)">
+            <svg class="icon icon-arrow" viewBox="0 0 64 64" :class="{ playing: playing }">
+                <path d="m 10.966268,58.441755 0,-25.628195 0,-25.6281938 L 33.160936,19.999464 55.355602,32.81356 33.160934,45.627658 Z" />
+            </svg>
+            <svg class="icon icon-pause" viewBox="0 0 32 32" :class="{ playing: playing }">
+                <path d="M4 4h10v24h-10zM18 4h10v24h-10z"></path>
+            </svg>
+        </button>
+    `,
+    methods: {
+        toggleTimer: function(id) {
+            this.$store.commit('toggleTimer', { id: id });
+        }
+    }
 });
 
 Vue.component('options', {
@@ -237,7 +281,8 @@ Vue.component('timer-item', {
                 <svg class="icon-pause" viewBox="0 0 32 32" :class="{ playing: playing }">
                     <path d="M4 4h10v24h-10zM18 4h10v24h-10z"></path>
                 </svg>
-    		</button>`,
+    		</button>
+            `,
             methods: {
                 toggleTimer: function(id) {
                     this.$store.commit('toggleTimer', { id: id });

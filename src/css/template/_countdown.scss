@@ -21,6 +21,49 @@
 		height: 100%;
 	}
 
+	&__controls {
+		position: absolute;
+		top: 0;
+		right: .5rem;
+	}
+
+	&__button {
+		position: relative;
+		border-radius: 0;
+		border: 0;
+		background-color: rgba(white, 0);
+		width: 2rem;
+		height: 3rem;
+		padding: 0;
+		outline: none;
+
+		.icon {
+			position: absolute;
+			right: .5rem;
+			top: 1rem;
+			fill: $color-dark;
+			width: 1rem;
+			height: 1rem;
+		}
+
+		.icon-arrow {
+			transition: opacity $easing--default;
+
+			&.playing {
+				opacity: 0;
+			}
+		}
+
+		.icon-pause {
+			transition: opacity $easing--default;
+			opacity: 0;
+
+			&.playing {
+				opacity: 1;
+			}
+		}
+	}
+
 	&__text {
 		width: 100%;
 		font-family: $gilroy;
