@@ -146,15 +146,48 @@ Vue.component('new-timer', {
 
 Vue.component('timer-item', {
 	props: ['timer'],
+    data: function() {
+        return {
+            swiped: 0,
+            transition: false
+        }
+    },
+    computed: {
+        swapped() {
+            return (100 - this.swiped);
+        }
+    },
+    methods: {
+        pan: function($event) {
+            const num = Math.abs(Math.round($event.distance / 2));
+            this.transition = false;
+            this.swiped = num < 100 ? num : 100;
+        },
+        panend: function($event) {
+            const velocity = Math.abs(Math.round($event.velocity));
+            if (this.swiped === 100 || velocity >= 2) {
+                this.$store.commit('removeTimer', { id: this.timer.id });
+            } else {
+                this.transition = true;
+                this.swiped = 0;
+            }
+        }
+    },
 	template: `
-	<div class="timer-item">
-        <section class="timer-item__about" :class="{ blurred: timer.editing }">
-            <amount :timer="timer"></amount>
-            <description :timer="timer"></description>
-        </section>
-        <go-button :timer="timer" :class="{ blurred: timer.editing }"></go-button>
-        <edit-time :timer="timer" :class="{ active: timer.editing }"></edit-time>
-    </div>`,
+        <v-touch class="timer-item"
+            v-on:pan="pan"
+            v-on:panend="panend"
+            v-bind:pan-options="{ direction: 'left', threshold: 20 }"
+            :style="{ transform: 'translate3d(-' + swiped + 'px, 0, 0)', opacity: (swapped / 100) }"
+            :class="{ transition: transition }">
+            <section class="timer-item__about" :class="{ blurred: timer.editing }">
+                <amount :timer="timer"></amount>
+                <description :timer="timer"></description>
+            </section>
+            <go-button :timer="timer" :class="{ blurred: timer.editing }"></go-button>
+            <edit-time :timer="timer" :class="{ active: timer.editing }"></edit-time>
+        </v-touch>
+    `,
     components: {
     	'amount': {
     		props: ['timer'],
@@ -234,14 +267,12 @@ Vue.component('timer-item', {
                     v-bind:swipe-options="{ direction: 'right', threshold: 20 }">
                     <span class="timer-edit__title"></span>
                     <v-touch class="timer-edit__spinner"
-                        :class="{ up: activeClass === 'up', down: activeClass === 'down' }"
                         v-on:pan="onPan({ prop: 'minutes', max: 99 }, $event)"
                         v-bind:pan-options="{ direction: 'vertical', threshold: 0 }">
                         <span class="timer-edit__spinner-item timer-edit__spinner-item--bold">{{ minutes | leadingZero }}</span>
                     </v-touch>
                     <span class="timer-edit__separator">:</span>
                     <v-touch class="timer-edit__spinner"
-                        :class="{ up: activeClass === 'up', down: activeClass === 'down' }"
                         v-on:pan="onPan({ prop: 'seconds', max: 59 }, $event)"
                         v-bind:pan-options="{ direction: 'vertical', threshold: 0 }">
                         <span class="timer-edit__spinner-item">{{ seconds | leadingZero }}</span>

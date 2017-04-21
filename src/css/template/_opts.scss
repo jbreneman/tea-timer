@@ -88,6 +88,10 @@
 		filter: blur(5px);
 	}
 
+	&.transition {
+		transition: transform .12s ease-out, opacity .12s ease-out;
+	}
+
 	&:not(:last-of-type) {
 		margin-bottom: .25rem;
 	}

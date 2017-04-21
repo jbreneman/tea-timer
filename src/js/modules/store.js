@@ -25,7 +25,6 @@ const store = new Vuex.Store({
 			state.activeNav = mutation;
 		},
 		setTimer(state, mutation) {
-
 			const playing = state.timers.filter(timer => timer.id === mutation.id)[0];
 			if (playing && playing.playing && state.interval) {
 				window.clearInterval(state.interval);
@@ -45,6 +44,14 @@ const store = new Vuex.Store({
 			}
 
 			storage.set('timers', state.timers);
+		},
+		removeTimer(state, mutation) {
+			const index = state.timers.map(timer => timer.id).indexOf(mutation.id);
+
+			if (index !== -1) {
+				state.timers.splice(index, 1);
+				storage.set('timers', state.timers);
+			}
 		},
 		toggleTimer(state, mutation) {
 			const playing = state.timers.filter(timer => timer.id === mutation.id)[0];
