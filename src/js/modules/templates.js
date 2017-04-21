@@ -107,7 +107,9 @@ Vue.component('options-section-timer', {
 	props: ['timers'],
 	template: `
 	<section class="timer-opts__section">
-		<timer-item v-for="timer in timers" :timer="timer" :key="timer.id"></timer-item>
+        <transition-group name="slide-up" tag="div">
+            <timer-item v-for="timer in timers" :timer="timer" :key="timer.id"></timer-item>
+        </transition-group>
         <new-timer>Add new timer</new-timer>
 	</section>`
 });
@@ -149,7 +151,8 @@ Vue.component('timer-item', {
     data: function() {
         return {
             swiped: 0,
-            transition: false
+            transition: false,
+            height: 'auto'
         }
     },
     computed: {
@@ -159,9 +162,10 @@ Vue.component('timer-item', {
     },
     methods: {
         pan: function($event) {
-            const num = Math.abs(Math.round($event.distance / 2));
-            this.transition = false;
-            this.swiped = num < 100 ? num : 100;
+            if ($event.angle > 135 || $event.angle < -135) {
+                const num = Math.abs(Math.round($event.distance / 2));
+                this.swiped = num < 100 ? num : 100;
+            }
         },
         panend: function($event) {
             const velocity = Math.abs(Math.round($event.velocity));
