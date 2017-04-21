@@ -278,10 +278,16 @@ body {
     -webkit-appearance: none;
        -moz-appearance: none;
             appearance: none;
-    background-color: rgba(241, 225, 200, 0.4);
+    background-color: rgba(255, 255, 255, 0);
+    background-image: -webkit-linear-gradient(top left, rgba(241, 225, 200, 0.5) 0%, rgba(241, 225, 200, 0.3) 100%);
+    background-image: linear-gradient(to bottom right, rgba(241, 225, 200, 0.5) 0%, rgba(241, 225, 200, 0.3) 100%);
     font-family: Oswald, sans-serif;
     text-transform: uppercase;
-    outline: none; }
+    outline: none;
+    -webkit-transition: opacity 0.24s ease-in;
+    transition: opacity 0.24s ease-in; }
+    .timer-opts__new:active {
+      opacity: .75; }
 
 .timer-item {
   position: relative;
@@ -295,7 +301,9 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: rgba(241, 225, 200, 0.4);
+  background-color: rgba(255, 255, 255, 0);
+  background-image: -webkit-linear-gradient(top left, rgba(241, 225, 200, 0.5) 0%, rgba(241, 225, 200, 0.3) 100%);
+  background-image: linear-gradient(to bottom right, rgba(241, 225, 200, 0.5) 0%, rgba(241, 225, 200, 0.3) 100%);
   padding: 2rem;
   position: relative;
   -webkit-transform: translateZ(0);
@@ -404,7 +412,7 @@ body {
     .timer-item__button:focus {
       background-color: rgba(255, 255, 255, 0); }
     .timer-item__button:active {
-      background-color: rgba(241, 225, 200, 0.4); }
+      background-color: rgba(241, 225, 200, 0.1); }
     .timer-item__button .icon-arrow {
       position: absolute;
       top: 50%;

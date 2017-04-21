@@ -70,10 +70,16 @@
 		border-radius: 0;
 		border: 0;
 		appearance: none;
-		background-color: rgba($color-light, .4);
+		background-color: rgba(white, 0);
+		background-image: linear-gradient(to bottom right, rgba($color-light, .5) 0%, rgba($color-light, .3) 100%);
 		font-family: $oswald;
 		text-transform: uppercase;
 		outline: none;
+		transition: opacity $easing--default;
+
+		&:active {
+			opacity: .75;
+		}
 	}
 }
 
@@ -85,7 +91,8 @@
 	overflow: hidden;
 	display: flex;
 	align-items: center;
-	background-color: rgba($color-light, .4);
+	background-color: rgba(white, 0);
+	background-image: linear-gradient(to bottom right, rgba($color-light, .5) 0%, rgba($color-light, .3) 100%);
 	padding: 2rem;
 	position: relative;
 	transform: translateZ(0);
@@ -194,7 +201,7 @@
 		}
 
 		&:active {
-			background-color: rgba($color-light, .4);
+			background-color: rgba($color-light, .1);
 		}
 
 		.icon-arrow {
