@@ -62,6 +62,18 @@
 		flex-grow: 1;
 		background-color: rgba($color-light, .2);
 	}
+
+	&__new {
+		width: 100%;
+		padding: 1rem;
+		margin-top: .25rem;
+		border-radius: 0;
+		border: 0;
+		appearance: none;
+		background-color: rgba($color-light, .4);
+		font-family: $oswald;
+		text-transform: uppercase;
+	}
 }
 
 .timer-item {

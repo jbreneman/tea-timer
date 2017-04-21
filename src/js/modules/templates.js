@@ -105,8 +105,16 @@ Vue.component('options-section', {
 
 Vue.component('options-section-timer', {
 	props: ['timers'],
+	template: `
+	<section class="timer-opts__section">
+		<timer-item v-for="timer in timers" :timer="timer" :key="timer.id"></timer-item>
+        <new-timer>Add new timer</new-timer>
+	</section>`
+});
+
+Vue.component('new-timer', {
     computed: {
-        emptyTimer() {
+        newTimer() {
             let id = 0;
 
             if (this.$store.state.timers) {
@@ -120,15 +128,20 @@ Vue.component('options-section-timer', {
                 desc: "New Timer",
                 id: id,
                 playing: false,
-                editing: false
+                editing: true
             }
         }
     },
-	template: `
-	<section class="timer-opts__section">
-		<timer-item v-for="timer in timers" :timer="timer" :key="timer.id"></timer-item>
-        <timer-item :timer="emptyTimer" :key="emptyTimer.id"></timer-item>
-	</section>`
+    methods: {
+        addNewTimer: function(timer) {
+            this.$store.commit('setTimer', timer);
+        }
+    },
+    template: `
+        <button class="timer-opts__new" @click="addNewTimer(newTimer)">
+            <slot>New Timer</slot>
+        </button>
+    `
 });
 
 Vue.component('timer-item', {

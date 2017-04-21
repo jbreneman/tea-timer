@@ -238,6 +238,18 @@ body {
         -ms-flex-positive: 1;
             flex-grow: 1;
     background-color: rgba(241, 225, 200, 0.2); }
+  .timer-opts__new {
+    width: 100%;
+    padding: 1rem;
+    margin-top: .25rem;
+    border-radius: 0;
+    border: 0;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    background-color: rgba(241, 225, 200, 0.4);
+    font-family: Oswald, sans-serif;
+    text-transform: uppercase; }
 
 .timer-item {
   width: 100%;
