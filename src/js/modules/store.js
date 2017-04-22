@@ -5,6 +5,10 @@ import * as config from '../config';
 
 Vue.use(Vuex);
 
+if (+storage.get('version') !== config.version) {
+	storage.set('timers', config.dummy);
+}
+
 const store = new Vuex.Store({
 	state: {
 		settings: {
@@ -14,7 +18,7 @@ const store = new Vuex.Store({
 		navOptions: ['timers', 'options'],
 		activeNav: 'timers',
 		interval: null,
-		timers: +storage.get('version') === config.version ? storage.get('timers') : config.dummy
+		timers: storage.get('timers')
 	},
 	mutations: {
 		updateSizes(state, mutation) {
