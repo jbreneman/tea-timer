@@ -5,10 +5,6 @@ import * as config from '../config';
 
 Vue.use(Vuex);
 
-if (+storage.get('version') !== config.version) {
-	storage.set('timers', config.dummy);
-}
-
 const store = new Vuex.Store({
 	state: {
 		settings: {

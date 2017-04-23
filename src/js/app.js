@@ -43,7 +43,14 @@ const vm = new Vue({
 				<countdown></countdown>
 				<options></options>
 			</section>
-		</div>`,
+		</div>
+	`,
+	beforeCreate: function() {
+		if (+storage.get('version') !== config.version) {
+			storage.set('timers', config.dummy);
+			storage.set('version', config.version);
+		}
+	},
 	mounted: function() {
 		storage.set('version', config.version);
 		store.commit('updateSizes', { width: this.$el.querySelector('.timer__body').offsetWidth, height: this.$el.querySelector('.timer__body').offsetHeight })
