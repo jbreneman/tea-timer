@@ -5,12 +5,24 @@ import * as config from '../config';
 
 Vue.use(Vuex);
 
+const notifications = 'Notification' in window && Notification.permission === 'granted';
+
+if(notifications) {
+	navigator.serviceWorker.ready.then(function(registration) {
+		store.state.worker = registration;
+	});
+}
+
 const store = new Vuex.Store({
 	state: {
 		settings: {
 			height: 0,
 			width: 0
 		},
+		permissions: {
+			notifications: notifications
+		},
+		worker: null,
 		navOptions: ['timers', 'options'],
 		activeNav: 'timers',
 		interval: null,
@@ -78,9 +90,22 @@ const store = new Vuex.Store({
 						active.playing = false;
 						active.countdown = active.amount;
 						storage.set('timers', state.timers);
+
+						if (state.permissions.notifications) {
+							state.worker.showNotification(playing.desc, {
+								icon: './assets/images/icon-48.png',
+								body: 'Timer has ended',
+								noscreen: false
+							});
+						}
 					}
 				}, 16);
 			}
+		},
+		updatePermissions(state, mutation) {
+			Object.keys(mutation).forEach(function(key) {
+			    state.permissions[key] = mutation[key];
+			});
 		}
 	}
 });

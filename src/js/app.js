@@ -30,7 +30,21 @@ window.addEventListener('offline', function(e) {
 }, false);
 
 if (navigator.onLine) {
+
 } else {
+
+}
+
+if('Notification' in window) {
+	if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+		Notification.requestPermission((permission) => {
+			if (permission === 'granted') {
+				store.commit.updatePermissions({ notifications: true });
+			} else {
+				store.commit.updatePermissions({ notifications: false });
+			}
+		});
+	}
 }
 
 const vm = new Vue({
