@@ -7,12 +7,6 @@ Vue.use(Vuex);
 
 const notifications = 'Notification' in window && Notification.permission === 'granted';
 
-if(notifications) {
-	navigator.serviceWorker.ready.then(function(registration) {
-		store.state.worker = registration;
-	});
-}
-
 const store = new Vuex.Store({
 	state: {
 		settings: {

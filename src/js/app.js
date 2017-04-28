@@ -14,6 +14,7 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker
     .register('./sw.js')
     .then(function(reg) {
+    	store.state.worker = reg;
     })
     .catch(function(err) {
         console.warn('Error whilst registering service worker', err);
