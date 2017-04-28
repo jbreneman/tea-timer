@@ -19,9 +19,7 @@ const store = new Vuex.Store({
 			height: 0,
 			width: 0
 		},
-		permissions: {
-			notifications: notifications
-		},
+		permissions: storage.get('permissions') || { notifications: notifications },
 		worker: null,
 		navOptions: ['timers', 'options'],
 		activeNav: 'timers',
@@ -106,6 +104,19 @@ const store = new Vuex.Store({
 			Object.keys(mutation).forEach(function(key) {
 			    state.permissions[key] = mutation[key];
 			});
+			storage.set('permissions', state.permissions);
+		},
+		togglePermission(state, mutation) {
+			state.permissions[mutation.prop] = !state.permissions[mutation.prop];
+
+			if (state.permissions[mutation.prop] && 'Notification' in window && Notification.permission !== 'granted') {
+				Notification.requestPermission((permission) => {
+					if (permission !== 'granted') {
+						state.commit.updatePermissions({ notifications: false });
+					}
+				});
+			}
+			storage.set('permissions', state.permissions);
 		}
 	}
 });

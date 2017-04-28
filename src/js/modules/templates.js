@@ -118,11 +118,19 @@ Vue.component('options', {
         }
     },
 	template: `
-	<section class="timer-opts" :style="{ height: height }">
-        <options-nav :nav-options="navOptions" :active-nav="activeNav"></options-nav>
-        <options-section-timer :timers="timers" :class="{ 'active': activeNav === 'timers' }"></options-section-timer>
-        <options-section :class="{ 'active': activeNav === 'options' }"></options-section>
-    </section>`
+    	<section class="timer-opts" :style="{ height: height }">
+            <options-nav :nav-options="navOptions" :active-nav="activeNav"></options-nav>
+            <options-section v-if="activeNav === 'timers'">
+                <transition-group name="slide-up" tag="div">
+                    <timer-item v-for="timer in timers" :timer="timer" :key="timer.id"></timer-item>
+                </transition-group>
+                <new-timer>Add new timer</new-timer>
+            </options-section>
+            <options-section v-if="activeNav === 'options'">
+                <preferences></preferences>
+            </options-section>
+        </section>
+    `
 });
 
 Vue.component('options-nav', {
@@ -142,20 +150,10 @@ Vue.component('options-nav', {
 Vue.component('options-section', {
 	props: ['timers'],
 	template: `
-	<section class="timer-opts__section options">
-		options
-	</section>`
-});
-
-Vue.component('options-section-timer', {
-	props: ['timers'],
-	template: `
-	<section class="timer-opts__section">
-        <transition-group name="slide-up" tag="div">
-            <timer-item v-for="timer in timers" :timer="timer" :key="timer.id"></timer-item>
-        </transition-group>
-        <new-timer>Add new timer</new-timer>
-	</section>`
+    	<section class="timer-opts__section">
+    		<slot></slot>
+    	</section>
+    `
 });
 
 Vue.component('new-timer', {
@@ -335,4 +333,47 @@ Vue.component('timer-item', {
             `
         }
     }
+});
+
+Vue.component('preferences', {
+    computed: {
+        permissions() {
+            return this.$store.state.permissions;
+        }
+    },
+    template: `
+        <section class="timer-preferences">
+            <div class="timer-item">
+                <toggle :label="'Notifications'" :permission="'notifications'"></toggle>
+            </div>
+        </section>
+    `
+});
+
+Vue.component('toggle', {
+    props: ['label', 'permission'],
+    computed: {
+        id() {
+            return `toggle--${ this.permission }`;
+        },
+        active() {
+            return this.$store.state.permissions[this.permission];
+        }
+    },
+    methods: {
+        togglePermission() {
+            this.$store.commit('togglePermission', { prop: this.permission })
+        }
+    },
+    template: `
+        <div class="timer-input__toggle">
+            <input :id="id" type="checkbox" class="timer-input__checkbox" :checked="active" @change="togglePermission()">
+            <label :for="id" class="timer-input__label-wrap">
+                <span class="timer-input__label">{{ label }}</span>
+                <span class="timer-input__toggler-wrap">
+                    On <span class="timer-input__toggler"></span> Off
+                </span>
+            </label>
+        </div>
+    `
 });

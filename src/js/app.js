@@ -14,7 +14,6 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker
     .register('./sw.js')
     .then(function(reg) {
-        console.log('Successfully registered service worker', reg);
     })
     .catch(function(err) {
         console.warn('Error whilst registering service worker', err);
@@ -39,9 +38,9 @@ if('Notification' in window) {
 	if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
 		Notification.requestPermission((permission) => {
 			if (permission === 'granted') {
-				store.commit.updatePermissions({ notifications: true });
+				store.commit('updatePermissions', { notifications: true });
 			} else {
-				store.commit.updatePermissions({ notifications: false });
+				store.commit('updatePermissions', { notifications: false });
 			}
 		});
 	}

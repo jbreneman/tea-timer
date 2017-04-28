@@ -255,15 +255,10 @@ body {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     background-color: rgba(0, 0, 0, 0.2);
-    opacity: 0;
     -webkit-transform: translateZ(0);
             transform: translateZ(0);
     -webkit-transition: opacity 0.24s ease-in;
     transition: opacity 0.24s ease-in; }
-    .timer-opts__section.active {
-      opacity: 1; }
-    .timer-opts__section.options {
-      display: none; }
   .timer-opts__fill {
     -webkit-box-flex: 1;
         -ms-flex-positive: 1;
@@ -542,6 +537,61 @@ body {
   .timer-edit__separator {
     font-size: 2.5rem;
     font-weight: 300; }
+
+.timer-input__checkbox {
+  display: none; }
+  .timer-input__checkbox:checked ~ .timer-input__label-wrap .timer-input__toggler::before {
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0); }
+
+.timer-input__toggler {
+  position: relative;
+  width: 1.75rem;
+  height: 1rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: .5rem;
+  margin: 0 .5rem; }
+  .timer-input__toggler::before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: .875rem;
+    height: .875rem;
+    border-radius: 50%;
+    background-image: -webkit-radial-gradient(25% circle, rgba(255, 255, 255, 0.9) 0%, rgba(237, 237, 237, 0.9) 100%);
+    background-image: radial-gradient(circle at 25%, rgba(255, 255, 255, 0.9) 0%, rgba(237, 237, 237, 0.9) 100%);
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    -webkit-transition: -webkit-transform 0.24s ease-in;
+    transition: -webkit-transform 0.24s ease-in;
+    transition: transform 0.24s ease-in;
+    transition: transform 0.24s ease-in, -webkit-transform 0.24s ease-in; }
+
+.timer-input__label-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-transform: uppercase; }
+
+.timer-input__label {
+  width: 100%;
+  font-size: .875rem;
+  margin-bottom: 1rem; }
+
+.timer-input__toggler-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 1rem;
+  font-size: .75rem; }
 
 .timer {
   position: relative;
