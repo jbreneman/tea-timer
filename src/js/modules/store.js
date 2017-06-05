@@ -13,12 +13,15 @@ const store = new Vuex.Store({
 			height: 0,
 			width: 0
 		},
-		permissions: storage.get('permissions') || { notifications: notifications },
+		permissions: storage.get('permissions') || { notifications: notifications, sound: false },
 		worker: null,
 		navOptions: ['timers', 'options'],
 		activeNav: 'timers',
 		interval: null,
-		timers: storage.get('timers')
+		timers: storage.get('timers'),
+		sound: {
+			piano: new Audio(`${ window.location.origin }/assets/audio/piano-notification-4.mp3`)
+		}
 	},
 	mutations: {
 		updateSizes(state, mutation) {
@@ -89,6 +92,10 @@ const store = new Vuex.Store({
 								body: 'Timer has ended',
 								noscreen: false
 							});
+						}
+
+						if (state.permissions.sound) {
+							state.sound.piano.play();
 						}
 					}
 				}, 16);

@@ -538,6 +538,9 @@ body {
     font-size: 2.5rem;
     font-weight: 300; }
 
+.timer-input__toggle {
+  width: 100%; }
+
 .timer-input__checkbox {
   display: none; }
   .timer-input__checkbox:checked ~ .timer-input__label-wrap .timer-input__toggler::before {

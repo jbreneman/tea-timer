@@ -346,6 +346,10 @@ Vue.component('preferences', {
             <div class="timer-item">
                 <toggle :label="'Notifications'" :permission="'notifications'"></toggle>
             </div>
+
+            <div class="timer-item">
+                <toggle :label="'Play Sound'" :permission="'sound'"></toggle>
+            </div>
         </section>
     `
 });
