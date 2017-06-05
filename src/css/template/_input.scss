@@ -9,7 +9,7 @@
 		&:checked {
 			~ .timer-input__label-wrap {
 				.timer-input__toggler::before {
-					transform: translate3d(-100%, 0, 0);
+					transform: translate3d(calc(-100% + 6px), 0, 0);
 				}
 			}
 		}
@@ -17,10 +17,10 @@
 
 	&__toggler {
 		position: relative;
-		width: 1.75rem;
-		height: 1rem;
+		width: 2rem;
+		height: 1.25rem;
 		background-color: rgba(black, .3);
-		border-radius: .5rem;
+		border-radius: .75rem;
 		margin: 0 .5rem;
 
 		&::before {
@@ -28,8 +28,8 @@
 			position: absolute;
 			top: 1px;
 			right: 1px;
-			width: .875rem;
-			height: .875rem;
+			width: 1.125rem;
+			height: 1.125rem;
 			border-radius: 50%;
 			background-image: radial-gradient(circle at 25%, rgba(255,255,255,.9) 0%,rgba(237,237,237,.9) 100%);
 			transform: translate3d(0, 0, 0);
@@ -45,7 +45,7 @@
 
 	&__label {
 		width: 100%;
-		font-size: .875rem;
+		font-size: 1.125rem;
 		margin-bottom: 1rem;
 	}
 
@@ -53,6 +53,6 @@
 		display: flex;
 		align-items: center;
 		margin-left: 1rem;
-		font-size: .75rem;
+		font-size: 1rem;
 	}
 }
