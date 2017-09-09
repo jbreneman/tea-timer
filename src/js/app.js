@@ -8,31 +8,17 @@ import VueTouch from 'vue-touch';
 import * as storage from './modules/storage';
 import * as config from './config';
 
-Vue.use(VueTouch, {name: 'v-touch'})
+Vue.use(VueTouch, { name: 'v-touch' })
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-    .register('./sw.js')
-    .then(function(reg) {
-    	store.state.worker = reg;
-    })
-    .catch(function(err) {
-        console.warn('Error whilst registering service worker', err);
-    });
-}
-
-window.addEventListener('online', function(e) {
-    console.log("You are online");
-}, false);
-
-window.addEventListener('offline', function(e) {
-    console.log("You are offline");
-}, false);
-
-if (navigator.onLine) {
-
-} else {
-
+	    .register('./sw.js')
+	    .then((reg) => {
+	    	store.state.worker = reg;
+	    })
+	    .catch((err) => {
+	        console.warn('Error whilst registering service worker', err);
+	    });
 }
 
 if('Notification' in window) {

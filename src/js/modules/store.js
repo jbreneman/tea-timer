@@ -19,10 +19,7 @@ const store = new Vuex.Store({
 		navOptions: ['timers', 'options'],
 		activeNav: 'timers',
 		interval: null,
-		timers: storage.get('timers'),
-		sound: {
-			piano: new Audio(`${ window.location.origin }/assets/audio/piano-notification-4.mp3`)
-		}
+		timers: storage.get('timers')
 	},
 	mutations: {
 		updateSizes(state, mutation) {
@@ -34,6 +31,7 @@ const store = new Vuex.Store({
 		},
 		setTimer(state, mutation) {
 			const playing = state.timers.filter(timer => timer.id === mutation.id)[0];
+			
 			if (playing && playing.playing && state.interval) {
 				window.clearInterval(state.interval);
 				playing.playing = false;
