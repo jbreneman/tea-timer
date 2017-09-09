@@ -1,4 +1,6 @@
-function formatTime(seconds, leadingZeroMinute = false) {
+import { notes } from '../config';
+
+export const formatTime = (seconds, leadingZeroMinute = false) => {
 	let time = {};
 
 	time.minutes = Math.floor(seconds / 60).toString();
@@ -23,7 +25,7 @@ function wrapCharacters(str, className = null) {
 		.join('');
 }
 
-function splitTime(seconds) {
+export const splitTime = (seconds) => {
 	const time = formatTime(seconds, true);
 
 	return {
@@ -32,4 +34,29 @@ function splitTime(seconds) {
 	}
 }
 
-export { formatTime, splitTime };
+const createChord = (context, frequencies) => {
+	return frequencies.map((frequency) => {
+		const oscillator = context.createOscillator();
+		oscillator.frequency.value = frequency;
+		oscillator.type = 'triangle';
+		oscillator.connect(context.destination);
+
+		return oscillator;
+	});
+};
+
+const playChord = (chord, speed = 500) => {
+	return new Promise((resolve, reject) => {
+		const context = new AudioContext();
+
+		createChord(context, chord).forEach((note, index) => {
+			note.start(index / 4 * (speed / 1000));
+			note.stop(speed / 1000);
+		});
+
+		window.setTimeout(() => {
+			context.close();
+			resolve();
+		}, speed);
+	});
+};

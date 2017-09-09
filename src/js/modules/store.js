@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import * as storage from './storage';
 import * as config from '../config';
+import { playChord } from './util';
 
 Vue.use(Vuex);
 
@@ -76,7 +77,7 @@ const store = new Vuex.Store({
 				const active = state.timers.filter(timer => timer.active)[0];
 				active.times = active.times || {};
 				active.times.end = Date.now() + (active.countdown * 1000);
-				state.interval = window.setInterval(()=> {
+				state.interval = window.setInterval(() => {
 					if (active.countdown > 0) {
 						active.countdown = Math.ceil((active.times.end - Date.now()) / 1000);
 						storage.set('timers', state.timers);
@@ -95,7 +96,14 @@ const store = new Vuex.Store({
 						}
 
 						if (state.permissions.sound) {
-							state.sound.piano.play();
+
+							playChord([notes['E4'], notes['G#4'], notes['B4']], 500)
+								.then(() => {
+									return playChord([notes['D4'], notes['F#4'], notes['A4']], 500);
+								})
+								.then(() => {
+									return playChord([notes['F#4'], notes['A4'], notes['C#4']], 500);
+								});
 						}
 					}
 				}, 16);
