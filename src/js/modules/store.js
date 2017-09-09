@@ -95,12 +95,12 @@ const store = new Vuex.Store({
 
 						if (state.permissions.sound) {
 
-							playChord([config.notes['E4'], config.notes['G#4'], config.notes['B4']], 500)
+							playChord([config.notes['E4'], config.notes['G#4'], config.notes['B4']], 750)
 								.then(() => {
-									return playChord([config.notes['D4'], config.notes['F#4'], config.notes['A4']], 500);
+									return playChord([config.notes['D4'], config.notes['F#4'], config.notes['A4']], 750);
 								})
 								.then(() => {
-									return playChord([config.notes['F#4'], config.notes['A4'], config.notes['C#4']], 500);
+									return playChord([config.notes['F#4'], config.notes['A4'], config.notes['C#4']], 750);
 								});
 						}
 					}
