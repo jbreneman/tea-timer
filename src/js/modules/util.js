@@ -43,7 +43,7 @@ const createChord = (context, frequencies) => {
 	});
 };
 
-const playChord = (chord, speed = 500) => {
+export const playChord = (chord, speed = 500) => {
 	return new Promise((resolve, reject) => {
 		const context = new AudioContext();
 
