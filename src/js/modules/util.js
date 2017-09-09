@@ -1,5 +1,3 @@
-import { notes } from '../config';
-
 export const formatTime = (seconds, leadingZeroMinute = false) => {
 	let time = {};
 

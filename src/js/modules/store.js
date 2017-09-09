@@ -31,7 +31,7 @@ const store = new Vuex.Store({
 		},
 		setTimer(state, mutation) {
 			const playing = state.timers.filter(timer => timer.id === mutation.id)[0];
-			
+
 			if (playing && playing.playing && state.interval) {
 				window.clearInterval(state.interval);
 				playing.playing = false;
@@ -95,12 +95,12 @@ const store = new Vuex.Store({
 
 						if (state.permissions.sound) {
 
-							playChord([notes['E4'], notes['G#4'], notes['B4']], 500)
+							playChord([config.notes['E4'], config.notes['G#4'], config.notes['B4']], 500)
 								.then(() => {
-									return playChord([notes['D4'], notes['F#4'], notes['A4']], 500);
+									return playChord([config.notes['D4'], config.notes['F#4'], config.notes['A4']], 500);
 								})
 								.then(() => {
-									return playChord([notes['F#4'], notes['A4'], notes['C#4']], 500);
+									return playChord([config.notes['F#4'], config.notes['A4'], config.notes['C#4']], 500);
 								});
 						}
 					}
