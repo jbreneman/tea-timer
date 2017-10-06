@@ -64,7 +64,7 @@ html {
   box-sizing: inherit; }
 
 body {
-  background-image: url("../images/background.jpg");
+  background-color: #020101;
   background-size: cover;
   display: -webkit-box;
   display: -ms-flexbox;

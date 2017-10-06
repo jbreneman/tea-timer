@@ -14,7 +14,6 @@ self.addEventListener('install', function(e) {
                 './assets/fonts/gilroy-extrabold-webfont.woff2',
                 './assets/fonts/gilroy-light-webfont.woff',
                 './assets/fonts/gilroy-light-webfont.woff2',
-                './assets/images/background.jpg',
                 './assets/audio/piano-notification-4.mp3'
             ]).then(function() {
                 self.skipWaiting();
