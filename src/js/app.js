@@ -2,12 +2,14 @@
 
 import Vue from 'vue';
 import './modules/filters';
-import './modules/templates';
 import { store } from './modules/store';
 import VueTouch from 'vue-touch';
 import * as storage from './modules/storage';
 import * as config from './config';
 import { initializeSounds } from './util/sounds';
+
+// Components
+import { App } from './components/app';
 
 Vue.use(VueTouch, { name: 'v-touch' })
 
@@ -39,14 +41,9 @@ if('Notification' in window) {
 const vm = new Vue({
 	el: '#app',
 	store,
+	components: { App },
 	template: `
-		<div id="app" class="timer">
-			<timer-title></timer-title>
-			<section class="timer__body">
-				<countdown></countdown>
-				<options></options>
-			</section>
-		</div>
+		<App/>
 	`,
 	beforeCreate: function() {
 		if (+storage.get('version') !== config.version) {
