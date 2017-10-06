@@ -7,6 +7,7 @@ import VueTouch from 'vue-touch';
 import * as storage from './modules/storage';
 import * as config from './config';
 import { initializeSounds } from './util/sounds';
+import { updateTheme } from './util';
 
 // Components
 import { App } from './components/app';
@@ -56,6 +57,9 @@ const vm = new Vue({
 		store.commit('updateSizes', { width: this.$el.querySelector('.timer__body').offsetWidth, height: this.$el.querySelector('.timer__body').offsetHeight })
 		this.$el.style.height = `${ this.$el.offsetHeight }px`;
 		this.$el.style.width = `${ this.$el.offsetWidth }px`;
+
+		// Initialize theme colors
+		updateTheme(store.state.themes.filter(theme => theme.active)[0]);
 
 		// Initialize audio element
 		// Needed for mobile blink browsers because they won't let

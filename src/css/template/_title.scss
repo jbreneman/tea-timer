@@ -9,13 +9,13 @@
 		font-size: 4rem;
 		text-transform: uppercase;
 		letter-spacing: -3px;
-		color: $color-light;
+		color: var(--color-light);
 		text-align: right;
 		padding: 0 5px 0 0;
 		line-height: 1;
-		background: linear-gradient(to right, #b2d6c7, #d0baaa);
+		background: linear-gradient(to right, var(--color-secondary), var(--color-accent));
 		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
+		-webkit-text-fill-color: rgba(black, .25);
 	}
 
 	&__small {

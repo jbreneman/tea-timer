@@ -2,6 +2,7 @@
 @import 'countdown';
 @import 'opts';
 @import 'input';
+@import 'select';
 
 .timer {
 	position: relative;
@@ -19,7 +20,7 @@
 		flex-direction: column;
 		flex-grow: 1;
 		z-index: 0;
-		background-color: $color-light;
-		background-image: linear-gradient(to right bottom, #A2D3C7, #EF8E7D);
+		background-color: var(--color-light);
+		background-image: linear-gradient(to right bottom, var(--color-secondary), var(--color-accent));
 	}
 }

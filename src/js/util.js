@@ -31,3 +31,9 @@ export const splitTime = (seconds) => {
 		seconds: wrapCharacters(time.seconds, 'timer-countdown__character')
 	}
 }
+
+export const updateTheme = (theme) => {
+	theme.colors.forEach(color => {
+		document.documentElement.style.setProperty(color.property, color.value);
+	});
+};

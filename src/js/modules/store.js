@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import * as storage from './storage';
 import * as config from '../config';
+import { updateTheme } from '../util';
 
 Vue.use(Vuex);
 
@@ -21,7 +22,8 @@ const store = new Vuex.Store({
 		timers: storage.get('timers'),
 		sound: {
 			piano: new Audio(`${ window.location.origin }/assets/audio/piano-notification-4.mp3`)
-		}
+		},
+		themes: storage.get('themes') || config.themes
 	},
 	mutations: {
 		updateSizes(state, mutation) {
@@ -119,6 +121,16 @@ const store = new Vuex.Store({
 				});
 			}
 			storage.set('permissions', state.permissions);
+		},
+		updateTheme(state, mutation) {
+			state.themes = state.themes.map(theme => {
+				theme.active = theme.name === mutation.theme;
+				return theme;
+			});
+
+			updateTheme(state.themes.filter(theme => theme.active)[0]);
+
+			storage.set('themes', state.themes);
 		}
 	}
 });

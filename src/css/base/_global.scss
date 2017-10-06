@@ -1,9 +1,9 @@
 body {
-	background-color: $color-primary__dark;
+	background-color: var(--color-primary--dark);
 	background-size: cover;
 	display: flex;
 	justify-content: center;
 	height: 100vh;
 	font-family: $oswald;
-	color: $color-dark;
+	color: var(--color-dark);
 }
