@@ -122,7 +122,7 @@ Vue.component('options', {
             <options-nav :nav-options="navOptions" :active-nav="activeNav"></options-nav>
             <options-section v-if="activeNav === 'timers'">
                 <transition-group name="slide-up" tag="div">
-                    <timer-item v-for="timer in timers" :timer="timer" :key="timer.id"></timer-item>
+                    <timer-item v-for="(timer, index) in timers" :timer="timer" :key="index"/>
                 </transition-group>
                 <new-timer>Add new timer</new-timer>
             </options-section>

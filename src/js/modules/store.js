@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import * as storage from './storage';
 import * as config from '../config';
-import { playChord } from './util';
 
 Vue.use(Vuex);
 
@@ -19,7 +18,10 @@ const store = new Vuex.Store({
 		navOptions: ['timers', 'options'],
 		activeNav: 'timers',
 		interval: null,
-		timers: storage.get('timers')
+		timers: storage.get('timers'),
+		sound: {
+			piano: new Audio(`${ window.location.origin }/assets/audio/piano-notification-4.mp3`)
+		}
 	},
 	mutations: {
 		updateSizes(state, mutation) {
@@ -85,7 +87,7 @@ const store = new Vuex.Store({
 						active.countdown = active.amount;
 						storage.set('timers', state.timers);
 
-						if (state.permissions.notifications) {
+						if (state.permissions.notifications && state.worker) {
 							state.worker.showNotification(playing.desc, {
 								icon: './assets/images/icon-48.png',
 								body: 'Timer has ended',
@@ -94,14 +96,7 @@ const store = new Vuex.Store({
 						}
 
 						if (state.permissions.sound) {
-
-							playChord([config.notes['E4'], config.notes['G#4'], config.notes['B4']], 750)
-								.then(() => {
-									return playChord([config.notes['D4'], config.notes['F#4'], config.notes['A4']], 750);
-								})
-								.then(() => {
-									return playChord([config.notes['F#4'], config.notes['A4'], config.notes['C#4']], 750);
-								});
+							state.sound.piano.play();
 						}
 					}
 				}, 16);

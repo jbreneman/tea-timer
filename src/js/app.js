@@ -7,9 +7,11 @@ import { store } from './modules/store';
 import VueTouch from 'vue-touch';
 import * as storage from './modules/storage';
 import * as config from './config';
+import { initializeSounds } from './util/sounds';
 
 Vue.use(VueTouch, { name: 'v-touch' })
 
+// Register service worker
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker
 	    .register('./sw.js')
@@ -21,6 +23,7 @@ if ('serviceWorker' in navigator) {
 	    });
 }
 
+// Test for notifications and ask if not already asked
 if('Notification' in window) {
 	if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
 		Notification.requestPermission((permission) => {
@@ -56,5 +59,10 @@ const vm = new Vue({
 		store.commit('updateSizes', { width: this.$el.querySelector('.timer__body').offsetWidth, height: this.$el.querySelector('.timer__body').offsetHeight })
 		this.$el.style.height = `${ this.$el.offsetHeight }px`;
 		this.$el.style.width = `${ this.$el.offsetWidth }px`;
+
+		// Initialize audio element
+		// Needed for mobile blink browsers because they won't let
+		// you just load and play a sound file
+		initializeSounds([store.state.sound.piano]);
 	}
 });

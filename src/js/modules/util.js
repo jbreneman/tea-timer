@@ -31,30 +31,3 @@ export const splitTime = (seconds) => {
 		seconds: wrapCharacters(time.seconds, 'timer-countdown__character')
 	}
 }
-
-const createChord = (context, frequencies) => {
-	return frequencies.map((frequency) => {
-		const oscillator = context.createOscillator();
-		oscillator.frequency.value = frequency;
-		oscillator.type = 'triangle';
-		oscillator.connect(context.destination);
-
-		return oscillator;
-	});
-};
-
-export const playChord = (chord, speed = 500) => {
-	return new Promise((resolve, reject) => {
-		const context = new AudioContext();
-
-		createChord(context, chord).forEach((note, index) => {
-			note.start(index / 4 * (speed / 1000));
-			note.stop(speed / 1000);
-		});
-
-		window.setTimeout(() => {
-			context.close();
-			resolve();
-		}, speed);
-	});
-};
